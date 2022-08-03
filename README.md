@@ -1,2 +1,4 @@
 # Krakenarp
-A robust c# dotnet client for Kraken (the crypto exchange)
+
+A very robust c# client for kraken exchange.
+
