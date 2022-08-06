@@ -6,6 +6,10 @@ namespace KrakenClient.Core;
 
 internal static class KrakenAuth
 {
+    internal static string? ApiKey { get; set; }
+    internal static string? SecretKey { get; set; }
+    internal static bool IsHttps { get; set; } = false;
+
     internal static string GetApiSignKey(string? apiKey, long? nonce, string? url, string? endpoint, string? parameters)
     {
         KrakenException.ThrowIfNullOrEmpty(nameof(apiKey), apiKey);
