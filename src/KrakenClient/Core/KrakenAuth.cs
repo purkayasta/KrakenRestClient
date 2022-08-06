@@ -4,9 +4,9 @@ using KrakenClient.Utilities;
 
 namespace KrakenClient.Core;
 
-internal sealed class KrakenAuth
+internal static class KrakenAuth
 {
-    internal static string GetSignKey(string apiKey, long nonce, string url, string endpoint, string parameters)
+    internal static string GetApiSignKey(string? apiKey, long? nonce, string? url, string? endpoint, string? parameters)
     {
         KrakenException.ThrowIfNullOrEmpty(nameof(apiKey), apiKey);
         KrakenException.ThrowIfNullOrEmpty(nameof(url), url);
@@ -14,18 +14,26 @@ internal sealed class KrakenAuth
         KrakenException.ThrowIfInvalidNumber(nameof(nonce), nonce);
 
         var apiEndpointPath = url + endpoint;
+        var hashTokenArr = GetHash(apiKey, apiEndpointPath, GetHashData(nonce, parameters));
 
-        return Convert.ToBase64String(GetHash(apiEndpointPath, GetHashData(nonce, parameters), apiKey));
+        return GetApiSignKey(hashTokenArr);
     }
 
-    private static string GetHashData(long nonce, string parameters)
+    internal static string GetApiSignKey(byte[] hashTokenByteArr)
     {
-        if (string.IsNullOrEmpty(parameters) | parameters.Length < 1)
+        return Convert.ToBase64String(hashTokenByteArr);
+    }
+
+    internal static string GetHashData(long? nonce, string? parameters)
+    {
+        if (nonce is null) KrakenException.Throw("Invalid Nonce");
+
+        if (string.IsNullOrEmpty(parameters) || parameters.Length < 1)
             return nonce + "nonce=" + nonce;
         return nonce + "nonce=" + nonce + parameters;
     }
 
-    private static byte[] GetHash(string apiEndpointPath, string hashData, string apiKey)
+    internal static byte[] GetHash(string apiKey, string apiEndpointPath, string hashData)
     {
         using var sha256 = SHA256.Create();
         var sha256Hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(hashData));
