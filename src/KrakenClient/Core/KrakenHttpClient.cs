@@ -11,6 +11,8 @@ public sealed class KrakenHttpClient : IKrakenHttpClient
 
     private static string BaseUrl { get; } = "api.kraken.com";
     private static int Version { get; } = 0;
+    private static string Protocol => KrakenAuth.IsHttps ? "https://" : "http://";
+
 
     private readonly IHttpClientFactory _httpClientFactory;
 
@@ -20,17 +22,14 @@ public sealed class KrakenHttpClient : IKrakenHttpClient
         Headers?.TryAdd("User-Agent", "Krakenarp");
     }
 
-    public Task<T> Get<T>(string url)
+    public Task<T?> Get<T>(string url) where T : class
     {
         var client = _httpClientFactory.CreateClient();
         client.DefaultRequestHeaders.AddHeaders(Headers);
-        return client.GetFromJsonAsync<T>(BaseUrl + "/" + Version + url);
+        return client.GetFromJsonAsync<T>(Protocol + BaseUrl + "/" + Version + "/" + url);
     }
 
-    // Add Api-Sign Property
-    // Add Nonce Property
-
-    public async Task<T> Post<T>(string url)
+    public async Task<T?> Post<T>(string url) where T : class
     {
         var client = _httpClientFactory.CreateClient();
         client.DefaultRequestHeaders.AddHeaders(Headers);
@@ -39,7 +38,15 @@ public sealed class KrakenHttpClient : IKrakenHttpClient
         StringContent? s = null;
         if (body is not null) s = new StringContent(body);
 
-        var result = await client.PostAsync(BaseUrl + "/" + Version + url, s ?? null);
-        return await JsonSerializer.DeserializeAsync<T>(result.Content.ReadAsStream());
+        var nonce = NonceGenerator.GetNonce;
+        var apiSignKey = KrakenAuth.GetApiSignKey(KrakenAuth.ApiKey, nonce, url, body);
+
+        // Add Api-Sign Property
+        // Add Nonce Property
+
+        var result = await client.PostAsync(Protocol + BaseUrl + "/" + Version + "/" + url, s ?? null);
+        if (result?.Content is null) return null;
+
+        return await JsonSerializer.DeserializeAsync<T>(await result.Content.ReadAsStreamAsync());
     }
 }

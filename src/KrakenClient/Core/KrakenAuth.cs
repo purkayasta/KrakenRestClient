@@ -10,15 +10,13 @@ internal static class KrakenAuth
     internal static string? SecretKey { get; set; }
     internal static bool IsHttps { get; set; } = false;
 
-    internal static string GetApiSignKey(string? apiKey, long? nonce, string? url, string? endpoint, string? parameters)
+    internal static string GetApiSignKey(string? apiKey, long? nonce, string? url, string? parameters)
     {
         KrakenException.ThrowIfNullOrEmpty(nameof(apiKey), apiKey);
         KrakenException.ThrowIfNullOrEmpty(nameof(url), url);
-        KrakenException.ThrowIfNullOrEmpty(nameof(endpoint), endpoint);
         KrakenException.ThrowIfInvalidNumber(nameof(nonce), nonce);
-
-        var apiEndpointPath = url + endpoint;
-        var hashTokenArr = GetHash(apiKey, apiEndpointPath, GetHashData(nonce, parameters));
+        
+        var hashTokenArr = GetHash(apiKey, url, GetHashData(nonce, parameters));
 
         return GetApiSignKey(hashTokenArr);
     }
@@ -37,11 +35,11 @@ internal static class KrakenAuth
         return nonce + "nonce=" + nonce + parameters;
     }
 
-    internal static byte[] GetHash(string apiKey, string apiEndpointPath, string hashData)
+    internal static byte[] GetHash(string apiKey, string url, string hashData)
     {
         using var sha256 = SHA256.Create();
         var sha256Hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(hashData));
-        var apiEndpointPathBytes = Encoding.UTF8.GetBytes(apiEndpointPath);
+        var apiEndpointPathBytes = Encoding.UTF8.GetBytes(url);
         var sha512HashData = apiEndpointPathBytes.Concat(sha256Hash).ToArray();
         var encryptor = new HMACSHA512(Convert.FromBase64String(apiKey));
         return encryptor.ComputeHash(sha512HashData);
