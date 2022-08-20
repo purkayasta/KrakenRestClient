@@ -1,6 +1,6 @@
 namespace KrakenClient.Core;
 
-internal sealed class NonceGenerator
+internal static class NonceGenerator
 {
-    internal static long GetNonce => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    internal static string GetNonce() => DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
 }

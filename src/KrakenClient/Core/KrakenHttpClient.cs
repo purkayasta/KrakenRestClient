@@ -4,14 +4,14 @@ using KrakenClient.Utilities;
 
 namespace KrakenClient.Core;
 
-public sealed class KrakenHttpClient : IKrakenHttpClient
+internal class KrakenHttpClient : IKrakenHttpClient
 {
     public Dictionary<string, string>? Headers { get; set; }
-    public Dictionary<string, string>? Parameters { get; set; }
+    public Dictionary<string, string>? BodyParameters { get; set; }
 
-    private static string BaseUrl { get; } = "api.kraken.com";
-    private static int Version { get; } = 0;
-    private static string Protocol => KrakenAuth.IsHttps ? "https://" : "http://";
+    private string BaseUrl { get; } = "api.kraken.com";
+    private int Version { get; } = 0;
+    private string Protocol { get; } = "https://";
 
 
     private readonly IHttpClientFactory _httpClientFactory;
@@ -24,27 +24,35 @@ public sealed class KrakenHttpClient : IKrakenHttpClient
 
     public Task<T?> Get<T>(string url) where T : class
     {
-        var client = _httpClientFactory.CreateClient();
-        client.DefaultRequestHeaders.AddHeaders(Headers);
-        return client.GetFromJsonAsync<T>(Protocol + BaseUrl + "/" + Version + "/" + url);
+        var stockHttpClient = _httpClientFactory.CreateClient();
+        stockHttpClient.DefaultRequestHeaders.AddHeaders(Headers);
+        return stockHttpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
     }
 
     public async Task<T?> Post<T>(string url) where T : class
     {
-        var client = _httpClientFactory.CreateClient();
-        client.DefaultRequestHeaders.AddHeaders(Headers);
-        var body = Parameters.ConvertToString();
+        ArgumentNullException.ThrowIfNull(KrakenAuth.ApiKey, nameof(KrakenAuth.ApiKey));
+        ArgumentNullException.ThrowIfNull(Headers, "Invalid Headers found");
 
-        StringContent? s = null;
-        if (body is not null) s = new StringContent(body);
+        Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
 
-        var nonce = NonceGenerator.GetNonce;
-        var apiSignKey = KrakenAuth.GetApiSignKey(KrakenAuth.ApiKey, nonce, url, body);
+        var nonce = NonceGenerator.GetNonce();
+        BodyParameters?.TryAdd("nonce", nonce);
 
-        // Add Api-Sign Property
-        // Add Nonce Property
+        var body = BodyParameters.ConvertToString();
+        var signKey = KrakenAuth.GetSignKey(nonce, url, body);
+        ArgumentNullException.ThrowIfNull(signKey, "Invalid Sign Key Generated!!");
+        Headers.TryAdd("API-Sign", signKey);
 
-        var result = await client.PostAsync(Protocol + BaseUrl + "/" + Version + "/" + url, s ?? null);
+        StringContent? httpStrContent = null;
+        if (body is not null) httpStrContent = new StringContent(body);
+
+        var stockHttpClient = _httpClientFactory.CreateClient();
+        stockHttpClient.DefaultRequestHeaders.AddHeaders(Headers);
+
+        var result = await stockHttpClient
+            .PostAsync($"{Protocol}{BaseUrl}/{Version}/{url}", httpStrContent ?? null);
+
         if (result?.Content is null) return null;
 
         return await JsonSerializer.DeserializeAsync<T>(await result.Content.ReadAsStreamAsync());

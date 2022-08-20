@@ -6,13 +6,16 @@ namespace KrakenClient.Core.Proxy;
 
 internal sealed class KrakenAuthProxy
 {
-    internal string GetSignKey(string? apiKey, string? url, long? nonce, string? parameters) =>
-        KrakenAuth.GetApiSignKey(apiKey, nonce, url, parameters);
+    internal void SetSecretKey(string key) => KrakenAuth.SecretKey = key;
+    internal void SetApiKey(string key) => KrakenAuth.ApiKey = key;
 
-    internal string GetSignKey(byte[] hashTokenByteArr) => KrakenAuth.GetApiSignKey(hashTokenByteArr);
+    internal string GetSignKey(string url, string nonce, string? parameters) =>
+        KrakenAuth.GetSignKey(nonce, url, parameters);
 
-    internal byte[] GetHash(string apiKey, string apiPath, string hashData) =>
-        KrakenAuth.GetHash(apiKey, apiPath, hashData);
+    internal string GetSignKey(byte[] hashTokenByteArr) => KrakenAuth.GetSignKey(hashTokenByteArr);
 
-    internal string GetHashData(long? nonce, string? parameters) => KrakenAuth.GetHashData(nonce, parameters);
+    internal byte[] GetHash(string apiPath, string hashData) =>
+        KrakenAuth.GetHash(apiPath, hashData);
+
+    internal string GetHashData(string nonce, string? parameters) => KrakenAuth.GetHashData(nonce, parameters);
 }
