@@ -1,45 +1,44 @@
 using System.Security.Cryptography;
 using System.Text;
-using KrakenClient.Utilities;
 
 namespace KrakenClient.Core;
 
 internal static class KrakenAuth
 {
-    internal static string GetApiSignKey(string? apiKey, long? nonce, string? url, string? endpoint, string? parameters)
+    internal static string? ApiKey { get; set; }
+    internal static string? SecretKey { get; set; }
+
+    internal static string GetSignKey(string nonce, string url, string? parameters)
     {
-        KrakenException.ThrowIfNullOrEmpty(nameof(apiKey), apiKey);
-        KrakenException.ThrowIfNullOrEmpty(nameof(url), url);
-        KrakenException.ThrowIfNullOrEmpty(nameof(endpoint), endpoint);
-        KrakenException.ThrowIfInvalidNumber(nameof(nonce), nonce);
+        ArgumentNullException.ThrowIfNull(nonce, nameof(nonce));
+        ArgumentNullException.ThrowIfNull(url, nameof(url));
 
-        var apiEndpointPath = url + endpoint;
-        var hashTokenArr = GetHash(apiKey, apiEndpointPath, GetHashData(nonce, parameters));
+        var hashTokenArr = GetHash(url, GetHashData(nonce, parameters));
 
-        return GetApiSignKey(hashTokenArr);
+        return GetSignKey(hashTokenArr);
     }
 
-    internal static string GetApiSignKey(byte[] hashTokenByteArr)
+    internal static string GetSignKey(byte[] hashTokenByteArr)
     {
         return Convert.ToBase64String(hashTokenByteArr);
     }
 
-    internal static string GetHashData(long? nonce, string? parameters)
+    internal static string GetHashData(string nonce, string? parameters)
     {
-        if (nonce is null) KrakenException.Throw("Invalid Nonce");
-
         if (string.IsNullOrEmpty(parameters) || parameters.Length < 1)
             return nonce + "nonce=" + nonce;
         return nonce + "nonce=" + nonce + parameters;
     }
 
-    internal static byte[] GetHash(string apiKey, string apiEndpointPath, string hashData)
+    internal static byte[] GetHash(string url, string hashData)
     {
+        ArgumentNullException.ThrowIfNull(SecretKey, nameof(SecretKey));
+
         using var sha256 = SHA256.Create();
         var sha256Hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(hashData));
-        var apiEndpointPathBytes = Encoding.UTF8.GetBytes(apiEndpointPath);
+        var apiEndpointPathBytes = Encoding.UTF8.GetBytes(url);
         var sha512HashData = apiEndpointPathBytes.Concat(sha256Hash).ToArray();
-        var encryptor = new HMACSHA512(Convert.FromBase64String(apiKey));
+        var encryptor = new HMACSHA512(Convert.FromBase64String(SecretKey));
         return encryptor.ComputeHash(sha512HashData);
     }
 }

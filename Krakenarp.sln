@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E43FD591-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenClientTest", "test\KrakenClientTest\KrakenClientTest.csproj", "{FD437EF0-ECB3-4BDA-84AF-72A52951111D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net6-web-api", "demos\net6-web-api\net6-web-api.csproj", "{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +32,14 @@ Global
 		{FD437EF0-ECB3-4BDA-84AF-72A52951111D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD437EF0-ECB3-4BDA-84AF-72A52951111D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD437EF0-ECB3-4BDA-84AF-72A52951111D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF} = {A26FEE79-8B81-499F-B8D4-6B452F45989B}
 		{FD437EF0-ECB3-4BDA-84AF-72A52951111D} = {E43FD591-5A6E-4BAA-93DA-C1DE6DA31331}
+		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A} = {DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}
 	EndGlobalSection
 EndGlobal
