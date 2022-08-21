@@ -19,9 +19,10 @@ public class TickerController : ControllerBase
         this.krakenClient = krakenClient;
     }
 
-    [HttpGet]
-    public IActionResult Get()
+    [HttpGet("ServerTime")]
+    public async Task<IActionResult> Get()
     {
+        var serverTime = await this.krakenClient.MarketData().GetServerTime();
         return Ok("Ticker Prices...");
     }
 }
