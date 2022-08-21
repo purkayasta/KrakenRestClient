@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Core;
+using KrakenClient.Models.MarketData;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -12,4 +13,5 @@ internal partial class MarketDataEndpoint : IMarketDataEndpoint
     {
         _httpClient = httpClient;
     }
+    
 }

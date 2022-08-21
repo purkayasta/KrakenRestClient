@@ -6,12 +6,12 @@ namespace KrakenClient;
 
 internal class KrakenClient : IKrakenClient
 {
-    private readonly IKrakenHttpClient _httpClient;
-
+    private readonly Lazy<IMarketDataEndpoint> _marketDataEndpoint;
+    
     public KrakenClient(IKrakenHttpClient httpClient)
     {
-        _httpClient = httpClient;
+        _marketDataEndpoint = new Lazy<IMarketDataEndpoint>(() => new MarketDataEndpoint(httpClient));
     }
 
-    public IMarketDataEndpoint MarketData() => new MarketDataEndpoint(_httpClient);
+    public IMarketDataEndpoint MarketData() => _marketDataEndpoint.Value;
 }

@@ -10,11 +10,11 @@ namespace net6_web_api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TickerController : ControllerBase
+public class MarketController : ControllerBase
 {
     private readonly IKrakenClient krakenClient;
 
-    public TickerController(IKrakenClient krakenClient)
+    public MarketController(IKrakenClient krakenClient)
     {
         this.krakenClient = krakenClient;
     }
@@ -23,6 +23,6 @@ public class TickerController : ControllerBase
     public async Task<IActionResult> Get()
     {
         var serverTime = await this.krakenClient.MarketData().GetServerTime();
-        return Ok("Ticker Prices...");
+        return Ok(serverTime);
     }
 }
