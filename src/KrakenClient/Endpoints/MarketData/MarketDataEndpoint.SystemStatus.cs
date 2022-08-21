@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string ServerTimeUrl = "/Time";
+    private const string SystemStatusUrl = "/SystemStatus";
 
-    public Task<ServerTime?> GetServerTime() => _httpClient.Get<ServerTime>(BaseUrl + ServerTimeUrl);
+    public Task<SystemStatus?> GetSystemStatus() => _httpClient.Get<SystemStatus>(BaseUrl + SystemStatusUrl);
 }

@@ -5,4 +5,5 @@ namespace KrakenClient.Contracts;
 public interface IMarketDataEndpoint
 {
     Task<ServerTime?> GetServerTime();
+    Task<SystemStatus?> GetSystemStatus();
 }
