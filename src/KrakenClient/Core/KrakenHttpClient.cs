@@ -6,8 +6,8 @@ namespace KrakenClient.Core;
 
 internal class KrakenHttpClient : IKrakenHttpClient
 {
-    public Dictionary<string, string>? Headers { get; set; }
-    public Dictionary<string, string>? BodyParameters { get; set; }
+    public Dictionary<string, string> Headers { get; set; } = new();
+    public Dictionary<string, string> BodyParameters { get; set; } = new();
 
     private string BaseUrl { get; } = "api.kraken.com";
     private int Version { get; } = 0;
@@ -25,7 +25,12 @@ internal class KrakenHttpClient : IKrakenHttpClient
     public Task<T?> Get<T>(string url) where T : class
     {
         _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
-        return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
+
+        if (BodyParameters.Count <= 0) 
+            return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
+
+        var stringContent = BodyParameters.ConvertToString();
+        return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}?{stringContent}");
     }
 
     public async Task<T?> Post<T>(string url) where T : class

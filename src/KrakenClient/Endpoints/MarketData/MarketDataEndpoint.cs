@@ -1,6 +1,5 @@
 using KrakenClient.Contracts;
 using KrakenClient.Core;
-using KrakenClient.Models.MarketData;
 
 namespace KrakenClient.Endpoints.MarketData;
 

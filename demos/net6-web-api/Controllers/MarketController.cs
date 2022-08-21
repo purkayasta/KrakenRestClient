@@ -20,9 +20,23 @@ public class MarketController : ControllerBase
     }
 
     [HttpGet("ServerTime")]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetServerTime()
     {
         var serverTime = await this.krakenClient.MarketData().GetServerTime();
         return Ok(serverTime);
+    }
+
+    [HttpGet("AssetInfo")]
+    public async Task<IActionResult> GetAssetInfo()
+    {
+        var assetInfo = await this.krakenClient.MarketData().GetAssetInfo();
+        return Ok(assetInfo);
+    }
+
+    [HttpGet("AssetInfo/{aclass}/{assetname}")]
+    public async Task<IActionResult> GetAssetInfo(string aclass, string assetname)
+    {
+        var assetInfo = await this.krakenClient.MarketData().GetAssetInfo(assetname, aclass);
+        return Ok(assetInfo);
     }
 }
