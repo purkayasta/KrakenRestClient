@@ -10,4 +10,6 @@ public partial interface IMarketDataEndpoint
     
     Task<AssetInfo?> GetAssetInfo();
     Task<AssetInfo?> GetAssetInfo(string asset, string aclass = "currency");
+
+    Task<TradableAssetPair?> GetTradableAssetPair(string assetPair);
 }

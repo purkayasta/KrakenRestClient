@@ -39,4 +39,11 @@ public class MarketController : ControllerBase
         var assetInfo = await this.krakenClient.MarketData().GetAssetInfo(assetname, aclass);
         return Ok(assetInfo);
     }
+
+    [HttpGet("TradableAssetPair/")]
+    public async Task<IActionResult> GetTradableAssetPair(string assetPair)
+    {
+        var pairResults = await this.krakenClient.MarketData().GetTradableAssetPair(assetPair);
+        return Ok(pairResults);
+    }
 }
