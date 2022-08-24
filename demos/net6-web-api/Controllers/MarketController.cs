@@ -53,4 +53,11 @@ public class MarketController : ControllerBase
         var result = await this.krakenClient.MarketData().GetTickerInformation(pair);
         return Ok(result);
     }
+
+    [HttpGet("OHLCData")]
+    public async Task<IActionResult> GetOhlcData(string pair)
+    {
+        var data = await this.krakenClient.MarketData().GetOhlcData(pair);
+        return Ok(data);
+    }
 }

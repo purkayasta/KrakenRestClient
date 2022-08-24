@@ -12,31 +12,31 @@ public class TradableAssetPairResult
     /// Alternate pair name
     /// </summary>
     [JsonPropertyName("altname")]
-    public string AlternatePairName { get; set; }
+    public string? AlternatePairName { get; set; }
 
     /// <summary>
     /// WebSocket pair name (if available)
     /// </summary>
     [JsonPropertyName("wsname")]
-    public string WebSocketPairName { get; set; }
+    public string? WebSocketPairName { get; set; }
 
     /// <summary>
     /// Asset class of base component
     /// </summary>
     [JsonPropertyName("aclass_base")]
-    public string AssetClassBase { get; set; }
+    public string? AssetClassBase { get; set; }
 
     /// <summary>
     /// Asset ID of base component
     /// </summary>
     [JsonPropertyName("base")]
-    public string BaseAsset { get; set; }
+    public string? BaseAsset { get; set; }
 
     /// <summary>
     /// Asset class of quote component
     /// </summary>
     [JsonPropertyName("aclass_quote")]
-    public string AssetClassForQuoteComponent { get; set; }
+    public string? AssetClassForQuoteComponent { get; set; }
 
     /// <summary>
     /// Volume lot size
@@ -60,31 +60,31 @@ public class TradableAssetPairResult
     /// Array of leverage amounts available when buying
     /// </summary>
     [JsonPropertyName("leverage_buy")]
-    public int[] LeverageBuy { get; set; }
+    public int[]? LeverageBuy { get; set; }
 
     /// <summary>
     /// Array of leverage amounts available when buying
     /// </summary>
     [JsonPropertyName("leverage_sell")]
-    public int[] LeverageSell { get; set; }
+    public int[]? LeverageSell { get; set; }
 
     /// <summary>
     /// Fee schedule array in [<volume>, <percent fee>] tuples
     /// </summary>
     [JsonPropertyName("fees")]
-    public List<double[]> Fees { get; set; }
+    public List<double[]>? Fees { get; set; }
 
     /// <summary>
     /// Maker fee schedule array in [<volume>, <percent fee>] tuples (if on maker/taker)
     /// </summary>
     [JsonPropertyName("fees_maker")]
-    public List<double[]> FeesMaker { get; set; }
+    public List<double[]>? FeesMaker { get; set; }
 
     /// <summary>
     /// Volume discount currency
     /// </summary>
     [JsonPropertyName("fee_volume_currency")]
-    public string FeeVolumeCurrency { get; set; }
+    public string? FeeVolumeCurrency { get; set; }
 
     /// <summary>
     /// Margin call level
@@ -102,5 +102,5 @@ public class TradableAssetPairResult
     /// Minimum order size (in terms of base currency)
     /// </summary>
     [JsonPropertyName("ordermin")]
-    public string OrderMin { get; set; }
+    public string? OrderMin { get; set; }
 }
