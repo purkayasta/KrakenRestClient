@@ -2,4 +2,5 @@
 
 public interface IKrakenClient
 {
+    public IMarketDataEndpoint MarketData();
 }

@@ -6,27 +6,31 @@ namespace KrakenClient.Core;
 
 internal class KrakenHttpClient : IKrakenHttpClient
 {
-    public Dictionary<string, string>? Headers { get; set; }
-    public Dictionary<string, string>? BodyParameters { get; set; }
+    public Dictionary<string, string> Headers { get; set; } = new();
+    public Dictionary<string, string> BodyParameters { get; set; } = new();
 
     private string BaseUrl { get; } = "api.kraken.com";
     private int Version { get; } = 0;
     private string Protocol { get; } = "https://";
 
 
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly HttpClient _httpClient;
 
-    public KrakenHttpClient(IHttpClientFactory httpClientFactory)
+    public KrakenHttpClient(HttpClient httpClient)
     {
-        _httpClientFactory = httpClientFactory;
+        _httpClient = httpClient;
         Headers?.TryAdd("User-Agent", "Krakenarp");
     }
 
     public Task<T?> Get<T>(string url) where T : class
     {
-        var stockHttpClient = _httpClientFactory.CreateClient();
-        stockHttpClient.DefaultRequestHeaders.AddHeaders(Headers);
-        return stockHttpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
+        _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
+
+        if (BodyParameters.Count <= 0) 
+            return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
+
+        var stringContent = BodyParameters.ConvertToString();
+        return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}?{stringContent}");
     }
 
     public async Task<T?> Post<T>(string url) where T : class
@@ -47,10 +51,9 @@ internal class KrakenHttpClient : IKrakenHttpClient
         StringContent? httpStrContent = null;
         if (body is not null) httpStrContent = new StringContent(body);
 
-        var stockHttpClient = _httpClientFactory.CreateClient();
-        stockHttpClient.DefaultRequestHeaders.AddHeaders(Headers);
+        _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
 
-        var result = await stockHttpClient
+        var result = await _httpClient
             .PostAsync($"{Protocol}{BaseUrl}/{Version}/{url}", httpStrContent ?? null);
 
         if (result?.Content is null) return null;
