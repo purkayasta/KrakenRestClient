@@ -18,4 +18,5 @@ public interface IMarketDataEndpoint
     Task<OHLCData?> GetOhlcData(string pair, int? since = null, int interval = 1);
 
     Task<OrderBook?> GetOrderbook(string pair, int count = 2);
+    Task<RecentTrades?> GetRecentTrades(string pair, int? since = null);
 }

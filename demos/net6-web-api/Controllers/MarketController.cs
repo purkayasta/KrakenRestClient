@@ -62,4 +62,10 @@ public class MarketController : ControllerBase
         var data = await this.krakenClient.MarketData().GetOrderbook(pair);
         return Ok(data);
     }
+
+    [HttpGet("RecentTrade")]
+    public async Task<IActionResult> GetRecentTradeAsync(string pair)
+    {
+        return Ok(await this.krakenClient.MarketData().GetRecentTrades(pair));
+    }
 }
