@@ -16,4 +16,6 @@ public interface IMarketDataEndpoint
     Task<TickerInformation?> GetTickerInformation(string pair);
 
     Task<OHLCData?> GetOhlcData(string pair, int? since = null, int interval = 1);
+
+    Task<OrderBook?> GetOrderbook(string pair, int count = 2);
 }
