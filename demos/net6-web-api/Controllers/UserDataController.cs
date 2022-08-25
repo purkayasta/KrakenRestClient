@@ -14,10 +14,16 @@ public class UserDataController : ControllerBase
         _krakenClient = krakenClient;
     }
 
-    [HttpGet("GetAccountBalance")]
+    [HttpPost("GetAccountBalance")]
     public async Task<IActionResult> GetAccountBalance()
     {
         var result = await _krakenClient.UserData().GetAccountBalance();
         return Ok(result);
+    }
+
+    [HttpPost("GetTradeBalance")]
+    public async Task<IActionResult> GetTradeBalance(string asset)
+    {
+        return Ok(await _krakenClient.UserData().GetTradeBalance(asset));
     }
 }
