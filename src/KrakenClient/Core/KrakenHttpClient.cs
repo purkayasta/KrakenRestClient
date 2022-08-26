@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using KrakenClient.Utilities;
 
@@ -19,14 +20,15 @@ internal class KrakenHttpClient : IKrakenHttpClient
     public KrakenHttpClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        Headers?.TryAdd("User-Agent", "Krakenarp");
+        _httpClient.DefaultRequestHeaders.Clear();
+        Headers?.TryAdd("User-Agent", "KrakenarpV2");
     }
 
     public Task<T?> Get<T>(string url) where T : class
     {
         _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
 
-        if (BodyParameters.Count <= 0) 
+        if (BodyParameters.Count <= 0)
             return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
 
         var stringContent = BodyParameters.ConvertToString();
@@ -38,23 +40,25 @@ internal class KrakenHttpClient : IKrakenHttpClient
         ArgumentNullException.ThrowIfNull(KrakenAuth.ApiKey, nameof(KrakenAuth.ApiKey));
         ArgumentNullException.ThrowIfNull(Headers, "Invalid Headers found");
 
-        Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
-
         var nonce = NonceGenerator.GetNonce();
         BodyParameters?.TryAdd("nonce", nonce);
 
         var body = BodyParameters.ConvertToString();
-        var signKey = KrakenAuth.GetSignKey(nonce, url, body);
+        var absoluteUri = $"/{Version}/{url}";
+        var signKey = KrakenAuth.CreateAuthSignature(nonce, absoluteUri, body);
+
         ArgumentNullException.ThrowIfNull(signKey, "Invalid Sign Key Generated!!");
-        Headers.TryAdd("API-Sign", signKey);
 
         StringContent? httpStrContent = null;
-        if (body is not null) httpStrContent = new StringContent(body);
+        if (body is not null)
+            httpStrContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
 
+        Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
+        Headers.TryAdd("API-Sign", signKey);
         _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
 
         var result = await _httpClient
-            .PostAsync($"{Protocol}{BaseUrl}/{Version}/{url}", httpStrContent ?? null);
+            .PostAsync($"{Protocol}{BaseUrl}/{absoluteUri}", httpStrContent ?? null);
 
         if (result?.Content is null) return null;
 

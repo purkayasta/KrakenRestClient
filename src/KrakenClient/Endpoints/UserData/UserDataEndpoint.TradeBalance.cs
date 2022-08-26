@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.UserData;
 
 internal partial class UserDataEndpoint : IUserDataEndpoint
 {
-    private const string TradeBalanceUrl = "";
+    private const string TradeBalanceUrl = "TradeBalance";
 
     public Task<TradeBalance?> GetTradeBalance(string asset = "ZUSD")
     {

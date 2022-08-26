@@ -7,7 +7,7 @@ public static class Extensions
 {
     public static void AddHeaders(this HttpRequestHeaders httpRequestHeaders, Dictionary<string, string>? headers)
     {
-        if (headers is null || headers.Count < 1) return;
+        if (headers is null || headers.Count == 0) return;
 
         foreach (var item in headers)
         {

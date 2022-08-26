@@ -10,12 +10,8 @@ internal sealed class KrakenAuthProxy
     internal void SetApiKey(string key) => KrakenAuth.ApiKey = key;
 
     internal string GetSignKey(string url, string nonce, string? parameters) =>
-        KrakenAuth.GetSignKey(nonce, url, parameters);
-
-    internal string GetSignKey(byte[] hashTokenByteArr) => KrakenAuth.GetSignKey(hashTokenByteArr);
+        KrakenAuth.CreateAuthSignature(nonce, url, parameters);
 
     internal byte[] GetHash(string apiPath, string hashData) =>
         KrakenAuth.GetHash(apiPath, hashData);
-
-    internal string GetHashData(string nonce, string? parameters) => KrakenAuth.GetHashData(nonce, parameters);
 }

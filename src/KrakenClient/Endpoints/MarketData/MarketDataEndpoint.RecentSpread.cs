@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string RecentSpreadUrl = "/Spread";
+    private const string RecentSpreadUrl = "Spread";
 
     public Task<RecentSpreads?> GetRecentSpreads(string pair, int? since = null)
     {

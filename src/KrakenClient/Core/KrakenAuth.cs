@@ -8,37 +8,26 @@ internal static class KrakenAuth
     internal static string? ApiKey { get; set; }
     internal static string? SecretKey { get; set; }
 
-    internal static string GetSignKey(string nonce, string url, string? parameters)
+    internal static string CreateAuthSignature(string nonce, string url, string? parameters)
     {
         ArgumentNullException.ThrowIfNull(nonce, nameof(nonce));
         ArgumentNullException.ThrowIfNull(url, nameof(url));
 
-        var hashTokenArr = GetHash(url, GetHashData(nonce, parameters));
+        var payload = nonce + parameters;
+        var signatureArray = GetHash(url, payload);
 
-        return GetSignKey(hashTokenArr);
+        return Convert.ToBase64String(signatureArray);
     }
 
-    internal static string GetSignKey(byte[] hashTokenByteArr)
-    {
-        return Convert.ToBase64String(hashTokenByteArr);
-    }
-
-    internal static string GetHashData(string nonce, string? parameters)
-    {
-        if (string.IsNullOrEmpty(parameters) || parameters.Length < 1)
-            return nonce + "nonce=" + nonce;
-        return nonce + "nonce=" + nonce + parameters;
-    }
-
-    internal static byte[] GetHash(string url, string hashData)
+    internal static byte[] GetHash(string url, string payload)
     {
         ArgumentNullException.ThrowIfNull(SecretKey, nameof(SecretKey));
 
         using var sha256 = SHA256.Create();
-        var sha256Hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(hashData));
-        var apiEndpointPathBytes = Encoding.UTF8.GetBytes(url);
-        var sha512HashData = apiEndpointPathBytes.Concat(sha256Hash).ToArray();
-        var encryptor = new HMACSHA512(Convert.FromBase64String(SecretKey));
-        return encryptor.ComputeHash(sha512HashData);
+        using var hmacSha512 = new HMACSHA512(Convert.FromBase64String(SecretKey));
+        var payloadHash = sha256.ComputeHash(Encoding.UTF8.GetBytes(payload));
+        var uriByteArr = Encoding.UTF8.GetBytes(url);
+        var payloadArray = uriByteArr.Concat(payloadHash).ToArray();
+        return hmacSha512.ComputeHash(payloadArray);
     }
 }
