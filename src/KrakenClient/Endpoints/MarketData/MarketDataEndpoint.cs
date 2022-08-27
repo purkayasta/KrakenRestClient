@@ -12,5 +12,4 @@ internal partial class MarketDataEndpoint : IMarketDataEndpoint
     {
         _httpClient = httpClient;
     }
-    
 }

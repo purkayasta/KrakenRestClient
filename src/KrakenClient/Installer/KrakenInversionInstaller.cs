@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KrakenClient.Installer;
 
-public static class DiInstaller
+public static class KrakenInversionInstaller
 {
     /// <summary>
     /// For private methods
@@ -26,7 +26,7 @@ public static class DiInstaller
     }
     
     /// <summary>
-    /// For Public Methods
+    /// For Public Methods Only
     /// </summary>
     /// <param name="serviceCollection"></param>
     public static void AddKraken(this IServiceCollection serviceCollection)

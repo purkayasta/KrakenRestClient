@@ -1,12 +1,10 @@
-using System.Text.Json.Serialization;
-
 namespace KrakenClient.Models.MarketData;
 
-public class TradableAssetPair : BaseResponse<IDictionary<string, TradableAssetPairResult>>
+public abstract class TradeAbleAssetPair : BaseResponse<IDictionary<string, TradeAbleAssetPairResult>>
 {
 }
 
-public class TradableAssetPairResult
+public abstract class TradeAbleAssetPairResult
 {
     /// <summary>
     /// Alternate pair name
@@ -69,13 +67,13 @@ public class TradableAssetPairResult
     public int[]? LeverageSell { get; set; }
 
     /// <summary>
-    /// Fee schedule array in [<volume>, <percent fee>] tuples
+    /// Fee schedule array in [volume, percent fee] tuples
     /// </summary>
     [JsonPropertyName("fees")]
     public List<double[]>? Fees { get; set; }
 
     /// <summary>
-    /// Maker fee schedule array in [<volume>, <percent fee>] tuples (if on maker/taker)
+    /// Maker fee schedule array in [volume, percent fee] tuples (if on maker/taker)
     /// </summary>
     [JsonPropertyName("fees_maker")]
     public List<double[]>? FeesMaker { get; set; }

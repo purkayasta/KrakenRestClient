@@ -3,7 +3,7 @@ using KrakenClient.Core;
 
 namespace KrakenClient.Installer;
 
-public static class FactoryInstaller
+public static class KrakenFactoryInstaller
 {
     public static IKrakenClient GetKrakenClient(IHttpClientFactory httpClientFactory, string apiKey, string secretKey)
     {

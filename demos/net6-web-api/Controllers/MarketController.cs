@@ -59,7 +59,7 @@ public class MarketController : ControllerBase
     [HttpGet("Orderbook")]
     public async Task<IActionResult> GetOrderBookAsync(string pair)
     {
-        var data = await this.krakenClient.MarketData().GetOrderbook(pair);
+        var data = await this.krakenClient.MarketData().GetOrderBook(pair);
         return Ok(data);
     }
 

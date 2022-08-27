@@ -1,8 +1,6 @@
-using System.Text.Json.Serialization;
-
 namespace KrakenClient.Models.UserData;
 
-public class TradeBalance : BaseResponse<TradeBalanceResult>
+public abstract class TradeBalance : BaseResponse<TradeBalanceResult>
 {
 }
 

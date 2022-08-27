@@ -1,6 +1,3 @@
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
 using KrakenClient.Utilities;
 
 namespace KrakenClient.Core;
@@ -21,7 +18,7 @@ internal class KrakenHttpClient : IKrakenHttpClient
     {
         _httpClient = httpClient;
         _httpClient.DefaultRequestHeaders.Clear();
-        Headers?.TryAdd("User-Agent", "KrakenarpV2");
+        Headers.TryAdd("User-Agent", "KrakenArp-V2");
     }
 
     public Task<T?> Get<T>(string url) where T : class
@@ -41,7 +38,7 @@ internal class KrakenHttpClient : IKrakenHttpClient
         ArgumentNullException.ThrowIfNull(Headers, "Invalid Headers found");
 
         var nonce = NonceGenerator.GetNonce();
-        BodyParameters?.TryAdd("nonce", nonce);
+        BodyParameters.TryAdd("nonce", nonce);
 
         var body = BodyParameters.ConvertToString();
         var absoluteUri = $"/{Version}/{url}";

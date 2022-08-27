@@ -7,11 +7,11 @@ internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string TradeAssetUrl = "AssetPairs";
 
-    public Task<TradableAssetPair?> GetTradableAssetPair(string assetPair)
+    public Task<TradeAbleAssetPair?> GetTradableAssetPair(string assetPair)
     {
         ArgumentNullException.ThrowIfNull(assetPair, nameof(assetPair));
 
         _httpClient.BodyParameters.Add("pair", assetPair);
-        return _httpClient.Get<TradableAssetPair>(BaseUrl + TradeAssetUrl);
+        return _httpClient.Get<TradeAbleAssetPair>(BaseUrl + TradeAssetUrl);
     }
 }
