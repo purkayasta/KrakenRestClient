@@ -2,7 +2,7 @@ using KrakenClient.Models.MarketData;
 
 namespace KrakenClient.Contracts;
 
-public partial interface IMarketDataEndpoint
+public interface IMarketDataEndpoint
 {
     Task<ServerTime?> GetServerTime();
     Task<SystemStatus?> GetSystemStatus();
