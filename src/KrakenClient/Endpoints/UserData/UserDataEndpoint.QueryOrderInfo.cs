@@ -8,7 +8,7 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
 {
     private const string QueryOrderInfoUrl = "QueryOrders";
 
-    public Task<QueryOrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false)
+    public Task<OrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
 
@@ -18,6 +18,6 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
         if (userReferenceId.HasValue)
             _httpClient.BodyParameters.Add(KrakenParameter.UserReferenceId, userReferenceId.Value.ToString());
 
-        return _httpClient.Post<QueryOrdersInfo>(BaseUrl + QueryOrderInfoUrl);
+        return _httpClient.Post<OrdersInfo>(BaseUrl + QueryOrderInfoUrl);
     }
 }

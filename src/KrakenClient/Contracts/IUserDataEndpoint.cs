@@ -43,5 +43,17 @@ public interface IUserDataEndpoint
     /// <param name="userReferenceId">Restrict results to given user reference id</param>
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
-    Task<QueryOrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
+    Task<OrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
+
+    /// <summary>
+    /// Retrieve information about trades/fills. 50 results are returned at a time, the most recent by default.
+    /// </summary>
+    /// <param name="type">Enum: "all" "any position" "closed position" "closing position" "no position"</param>
+    /// <param name="trades">Whether or not to include trades related to position in output</param>
+    /// <param name="start">Starting unix timestamp or trade tx ID of results (exclusive)</param>
+    /// <param name="end">Ending unix timestamp or trade tx ID of results (inclusive)</param>
+    /// <param name="offset">Result offset for pagination</param>
+    /// <returns></returns>
+    Task<TradesHistory?> GetTradesInfo(string type = "all", bool trades = false, int? start = null,
+        int? end = null, int? offset = null);
 }
