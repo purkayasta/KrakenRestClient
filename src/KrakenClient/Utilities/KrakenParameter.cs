@@ -11,4 +11,6 @@ internal static class KrakenParameter
     internal const string Asset = "asset";
     internal const string TransactionId = "txid";
     internal const string Type = "type";
+    internal const string Docalcs = "docalcs";
+    internal const string Consolidation = "consolidation";
 }

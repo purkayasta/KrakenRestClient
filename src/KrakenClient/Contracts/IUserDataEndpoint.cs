@@ -64,4 +64,14 @@ public interface IUserDataEndpoint
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
     Task<TradesInfo?> QueryTradesInfo(string transactionIds, bool trades = false);
+
+    /// <summary>
+    /// Get information about open margin positions.
+    /// </summary>
+    /// <param name="transactionIds">Comma delimited list of txids to limit output to</param>
+    /// <param name="docalcs">Whether to include P&L calculations</param>
+    /// <param name="consolidation">Consolidate positions by market/pair</param>
+    /// <returns></returns>
+    Task<OpenPositions?> GetOpenPositions(string transactionIds, bool docalcs = false,
+        string consolidation = "market");
 }
