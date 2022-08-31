@@ -54,6 +54,14 @@ public interface IUserDataEndpoint
     /// <param name="end">Ending unix timestamp or trade tx ID of results (inclusive)</param>
     /// <param name="offset">Result offset for pagination</param>
     /// <returns></returns>
-    Task<TradesHistory?> GetTradesInfo(string type = "all", bool trades = false, int? start = null,
+    Task<TradesHistory?> GetTradesHistory(string type = "all", bool trades = false, int? start = null,
         int? end = null, int? offset = null);
+
+    /// <summary>
+    /// Retrieve information about specific trades/fills.
+    /// </summary>
+    /// <param name="transactionIds">Comma delimited list of transaction IDs to query info about (20 maximum)</param>
+    /// <param name="trades">Whether or not to include trades related to position in output</param>
+    /// <returns></returns>
+    Task<TradesInfo?> GetTradesInfo(string transactionIds, bool trades = false);
 }
