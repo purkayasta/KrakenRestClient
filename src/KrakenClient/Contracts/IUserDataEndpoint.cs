@@ -63,5 +63,5 @@ public interface IUserDataEndpoint
     /// <param name="transactionIds">Comma delimited list of transaction IDs to query info about (20 maximum)</param>
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
-    Task<TradesInfo?> GetTradesInfo(string transactionIds, bool trades = false);
+    Task<TradesInfo?> QueryTradesInfo(string transactionIds, bool trades = false);
 }

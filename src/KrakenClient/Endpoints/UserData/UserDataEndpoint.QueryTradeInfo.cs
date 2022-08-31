@@ -8,7 +8,7 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
 {
     private const string QueryTradeInfoUrl = "QueryTrades";
 
-    public Task<TradesInfo?> GetTradesInfo(string transactionIds, bool trades = false)
+    public Task<TradesInfo?> QueryTradesInfo(string transactionIds, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
 
