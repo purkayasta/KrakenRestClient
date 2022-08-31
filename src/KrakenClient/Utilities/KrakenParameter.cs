@@ -9,4 +9,5 @@ internal static class KrakenParameter
     internal const string OffSet = "ofs";
     internal const string CloseTime = "closetime";
     internal const string Asset = "asset";
+    internal const string TransactionId = "txid";
 }

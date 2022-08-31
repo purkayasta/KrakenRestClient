@@ -35,4 +35,13 @@ public interface IUserDataEndpoint
     /// <returns></returns>
     Task<ClosedOrders?> GetClosedOrders(bool trades = false, int? userReferenceId = null, int? startTime = null,
         int? endTime = null, int? offset = null, string closedTime = "both");
+
+    /// <summary>
+    /// Retrieve information about specific orders.
+    /// </summary>
+    /// <param name="transactionIds">(required*)Comma delimited list of transaction IDs to query info about (50 maximum)</param>
+    /// <param name="userReferenceId">Restrict results to given user reference id</param>
+    /// <param name="trades">Whether or not to include trades related to position in output</param>
+    /// <returns></returns>
+    Task<QueryOrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
 }
