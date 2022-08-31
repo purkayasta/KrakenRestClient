@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Models.UserData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
@@ -11,7 +12,7 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
     {
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
 
-        _httpClient.BodyParameters.Add("asset", asset);
+        _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
         return _httpClient.Post<TradeBalance>(BaseUrl + TradeBalanceUrl);
     }
 }

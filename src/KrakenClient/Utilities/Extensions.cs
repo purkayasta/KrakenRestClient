@@ -46,5 +46,4 @@ public static class Extensions
             false => "false",
         };
     }
-    public static string ToStr(this bool booleanValue) => nameof(booleanValue);
 }

@@ -10,8 +10,9 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
 
     public Task<OpenOrders?> GetOpenOrders(bool trades = false, int? userReferenceId = null)
     {
-        _httpClient.BodyParameters.Add("trades", trades.ToValueStr());
-        if (userReferenceId.HasValue) _httpClient.BodyParameters.Add("userref", userReferenceId.Value.ToString());
+        _httpClient.BodyParameters.Add(KrakenParameter.Trade, trades.ToValueStr());
+        if (userReferenceId.HasValue)
+            _httpClient.BodyParameters.Add(KrakenParameter.UserReferenceId, userReferenceId.Value.ToString());
         return _httpClient.Post<OpenOrders>(BaseUrl + OpenOrderUrl);
     }
 }
