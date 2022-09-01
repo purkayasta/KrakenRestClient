@@ -74,4 +74,25 @@ public interface IUserDataEndpoint
     /// <returns></returns>
     Task<OpenPositions?> GetOpenPositions(string transactionIds, bool docalcs = false,
         string consolidation = "market");
+
+    /// <summary>
+    /// Retrieve information about ledger entries. 50 results are returned at a time, the most recent by default.
+    /// </summary>
+    /// <param name="asset">Comma delimited list of assets to restrict output to, Default => all</param>
+    /// <param name="aclass">Asset, Default: "currency"</param>
+    /// <param name="type">Type of ledger to retrieve, Enum: "all" "deposit" "withdrawal" "trade" "margin" "rollover" "credit" "transfer" "settled" "staking" "sale"</param>
+    /// <param name="start">Starting unix timestamp or ledger ID of results (exclusive)</param>
+    /// <param name="end">Ending unix timestamp or ledger ID of results (inclusive)</param>
+    /// <param name="offset">Result offset for pagination</param>
+    /// <returns></returns>
+    Task<LedgerInfo?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
+        int? start = null, int? end = null, int? offset = null);
+
+    /// <summary>
+    /// Retrieve information about specific ledger entries.
+    /// </summary>
+    /// <param name="id">Comma delimited list of ledger IDs to query info about (20 maximum)</param>
+    /// <param name="trades">Whether or not to include trades related to position in output. Default = false</param>
+    /// <returns></returns>
+    Task<Ledgers?> QueryLedgers(string id, bool trades = false);
 }
