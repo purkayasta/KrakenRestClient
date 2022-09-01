@@ -43,7 +43,7 @@ public interface IUserDataEndpoint
     /// <param name="userReferenceId">Restrict results to given user reference id</param>
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
-    Task<OrdersInfo?> GetOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
+    Task<OrdersInfo?> QueryOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
 
     /// <summary>
     /// Retrieve information about trades/fills. 50 results are returned at a time, the most recent by default.
@@ -95,4 +95,12 @@ public interface IUserDataEndpoint
     /// <param name="trades">Whether or not to include trades related to position in output. Default = false</param>
     /// <returns></returns>
     Task<Ledgers?> QueryLedgers(string id, bool trades = false);
+
+    /// <summary>
+    /// If an asset pair is on a maker/taker fee schedule, the taker side is given in fees and maker side in fees_maker. For pairs not on maker/taker, they will only be given in fees.
+    /// </summary>
+    /// <param name="pair">Comma delimited list of asset pairs to get fee info on (optional)</param>
+    /// <param name="feeInfo">Whether or not to include fee info in results (optional)</param>
+    /// <returns></returns>
+    Task<TradeVolume?> GetTradeVolume(string? pair = null, bool? feeInfo = null);
 }
