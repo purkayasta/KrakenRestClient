@@ -1,7 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿namespace KrakenClient.Models.MarketData;
 
-namespace KrakenClient.Models.MarketData;
-
-public class OrderBook : BaseResponse<JsonObject>
+public abstract class OrderBook : BaseResponse<JsonObject>
 {
 }

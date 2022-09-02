@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string TickerUrl = "/Ticker";
+    private const string TickerUrl = "Ticker";
 
     public Task<TickerInformation?> GetTickerInformation(string pair)
     {

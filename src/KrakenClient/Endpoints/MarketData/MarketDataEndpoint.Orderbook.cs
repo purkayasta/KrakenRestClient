@@ -5,9 +5,9 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string OrderBookUrl = "/Depth";
+    private const string OrderBookUrl = "Depth";
 
-    public Task<OrderBook?> GetOrderbook(string pair, int count = 2)
+    public Task<OrderBook?> GetOrderBook(string pair, int count = 2)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 

@@ -1,12 +1,10 @@
-using System.Text.Json.Serialization;
-
 namespace KrakenClient.Models.MarketData;
 
-public class ServerTime : BaseResponse<ServerTimeResult>
+public abstract class ServerTime : BaseResponse<ServerTimeResult>
 {
 }
 
-public class ServerTimeResult
+public abstract class ServerTimeResult
 {
     [JsonPropertyName("unixtime")] public int UnixTime { get; set; }
 

@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string OhlcUrl = "/OHLC";
+    private const string OhlcUrl = "OHLC";
 
     public Task<OHLCData?> GetOhlcData(string pair, int? since = null, int interval = 1)
     {

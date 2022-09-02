@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.MarketData;
 
 internal partial class MarketDataEndpoint : IMarketDataEndpoint
 {
-    private const string AssetInfoUrl = "/Assets";
+    private const string AssetInfoUrl = "Assets";
 
     public Task<AssetInfo?> GetAssetInfo() => _httpClient.Get<AssetInfo>(BaseUrl + AssetInfoUrl);
 
