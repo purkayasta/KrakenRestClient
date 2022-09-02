@@ -118,4 +118,12 @@ public interface IUserDataEndpoint
     /// <param name="endtm">UNIX timestamp for report end time (default now)</param>
     /// <returns></returns>
     Task<RequestExportReport?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null);
+
+    /// <summary>
+    /// Get status of requested data exports.
+    /// </summary>
+    /// <param name="report">Type of reports to inquire about. Enum: "trades" "ledgers"</param>
+    /// <returns></returns>
+    Task<ExportReportStatus?> GetExportReportStatus(string report);
+
 }

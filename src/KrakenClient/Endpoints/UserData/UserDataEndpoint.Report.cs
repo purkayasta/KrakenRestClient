@@ -8,8 +8,6 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
 {
     public Task<RequestExportReport?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null)
     {
-        string url = "AddExport";
-
         KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
         KrakenException.ThrowIfNullOrEmpty(description, nameof(description));
         KrakenException.ThrowIfNullOrEmpty(format, nameof(format));
@@ -24,6 +22,15 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
         if (endtm.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.End, endtm.Value.ToString());
 
 
-        return _httpClient.Post<RequestExportReport>(BaseUrl + url);
+        return _httpClient.Post<RequestExportReport>(BaseUrl + "AddExport");
+    }
+
+    public Task<ExportReportStatus?> GetExportReportStatus(string report)
+    {
+        KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Report, report);
+
+        return _httpClient.Post<ExportReportStatus>(BaseUrl + "ExportStatus");
     }
 }
