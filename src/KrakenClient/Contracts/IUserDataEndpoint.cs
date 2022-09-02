@@ -103,4 +103,19 @@ public interface IUserDataEndpoint
     /// <param name="feeInfo">Whether or not to include fee info in results (optional)</param>
     /// <returns></returns>
     Task<TradeVolume?> GetTradeVolume(string? pair = null, bool? feeInfo = null);
+
+    /// <summary>
+    /// Request export of trades or ledgers.
+    /// </summary>
+    /// <param name="report">Type of data to export, Enum: "trades" "ledgers"</param>
+    /// <param name="description">Description for the export</param>
+    /// <param name="format">File format to export. Enum: "CSV" "TSV"</param>
+    /// <param name="fields">Comma-delimited list of fields to include
+    /// <list type="bullet"><code>trades:</code> ordertxid, time, ordertype, price, cost, fee, vol, margin, misc, ledgers</list>
+    /// <list type="bullet"><code>ledgers:</code>  refid, time, type, aclass, asset, amount, fee, balance</list>
+    /// </param>
+    /// <param name="starttm">UNIX timestamp for report start time (default 1st of the current month)</param>
+    /// <param name="endtm">UNIX timestamp for report end time (default now)</param>
+    /// <returns></returns>
+    Task<RequestExportReport?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null);
 }

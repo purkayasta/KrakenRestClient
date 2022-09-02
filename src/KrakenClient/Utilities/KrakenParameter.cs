@@ -17,4 +17,8 @@ internal static class KrakenParameter
     internal const string Id = "id";
     internal const string Pair = "pair";
     internal const string FeeInfo = "fee-info";
+    internal const string Report = "report";
+    internal const string Description = "description";
+    internal const string Format = "format";
+    internal const string Fields = "fields";
 }
