@@ -42,4 +42,15 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         return _httpClient.Post<Stream>(BaseUrl + "RetrieveExport");
     }
+
+    public Task<DeleteExportReport?> DeleteExportReport(string id, string type)
+    {
+        KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
+        KrakenException.ThrowIfNullOrEmpty(type, nameof(type));
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
+        _httpClient.BodyParameters.Add(KrakenParameter.Type, type);
+
+        return _httpClient.Post<DeleteExportReport>(BaseUrl + "RemoveExport");
+    }
 }
