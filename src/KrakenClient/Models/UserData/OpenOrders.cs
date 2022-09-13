@@ -1,10 +1,10 @@
 ﻿namespace KrakenClient.Models.UserData;
 
-public abstract class OpenOrders : BaseResponse<OpenOrderResult>
+public class OpenOrders : BaseResponse<OpenOrderResult>
 {
 }
 
-public abstract class OpenOrderResult
+public sealed class OpenOrderResult
 {
     [JsonPropertyName("open")] public IDictionary<string, BaseOrder>? Open { get; set; }
 }

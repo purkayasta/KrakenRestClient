@@ -4,7 +4,7 @@ using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 {
     public Task<RequestExportReport?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null)
     {
@@ -32,5 +32,25 @@ internal partial class UserDataEndpoint : IUserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Report, report);
 
         return _httpClient.Post<ExportReportStatus>(BaseUrl + "ExportStatus");
+    }
+
+    public Task<Stream?> RetrieveDataExport(string id)
+    {
+        KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
+
+        return _httpClient.Post<Stream>(BaseUrl + "RetrieveExport");
+    }
+
+    public Task<DeleteExportReport?> DeleteExportReport(string id, string type)
+    {
+        KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
+        KrakenException.ThrowIfNullOrEmpty(type, nameof(type));
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
+        _httpClient.BodyParameters.Add(KrakenParameter.Type, type);
+
+        return _httpClient.Post<DeleteExportReport>(BaseUrl + "RemoveExport");
     }
 }

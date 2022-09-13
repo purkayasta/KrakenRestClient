@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class TickerInformation : BaseResponse<IDictionary<string, TickerInformationResult>>
+public class TickerInformation : BaseResponse<IDictionary<string, TickerInformationResult>>
 {
 }
 
-public abstract class TickerInformationResult
+public sealed class TickerInformationResult
 {
     [JsonPropertyName("a")] public string[]? Ask { get; set; }
 

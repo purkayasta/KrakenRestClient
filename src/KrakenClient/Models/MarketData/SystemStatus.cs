@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class SystemStatus : BaseResponse<SystemStatusResult>
+public class SystemStatus : BaseResponse<SystemStatusResult>
 {
 }
 
-public abstract class SystemStatusResult
+public sealed class SystemStatusResult
 {
     [JsonPropertyName("status")] public string? Status { get; set; }
 

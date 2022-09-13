@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class ServerTime : BaseResponse<ServerTimeResult>
+public class ServerTime : BaseResponse<ServerTimeResult>
 {
 }
 
-public abstract class ServerTimeResult
+public sealed class ServerTimeResult
 {
     [JsonPropertyName("unixtime")] public int UnixTime { get; set; }
 

@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class TradeAbleAssetPair : BaseResponse<IDictionary<string, TradeAbleAssetPairResult>>
+public class TradeAbleAssetPair : BaseResponse<IDictionary<string, TradeAbleAssetPairResult>>
 {
 }
 
-public abstract class TradeAbleAssetPairResult
+public sealed class TradeAbleAssetPairResult
 {
     /// <summary>
     /// Alternate pair name

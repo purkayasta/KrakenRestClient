@@ -4,7 +4,7 @@ public class OpenPositions : BaseResponse<IDictionary<string, OpenPositionResult
 {
 }
 
-public abstract class OpenPositionResult
+public sealed class OpenPositionResult
 {
     /// <summary>
     /// Order ID responsible for the position

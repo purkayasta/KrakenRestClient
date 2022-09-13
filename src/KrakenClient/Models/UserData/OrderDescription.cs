@@ -1,6 +1,6 @@
 namespace KrakenClient.Models.UserData;
 
-public abstract class OrderDescription
+public sealed class OrderDescription
 {
     /// <summary>
     /// Asset pair

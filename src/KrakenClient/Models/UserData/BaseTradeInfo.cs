@@ -102,7 +102,7 @@ public abstract class BaseTradeInfo
     /// </summary>
     [JsonPropertyName("net")]
     public string? NetProfit { get; set; }
-    
+
     /// <summary>
     /// List of closing trades for position (if available)
     /// </summary>

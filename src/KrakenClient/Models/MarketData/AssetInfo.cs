@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class AssetInfo : BaseResponse<IDictionary<string, AssetInfoResult>>
+public class AssetInfo : BaseResponse<IDictionary<string, AssetInfoResult>>
 {
 }
 
-public abstract class AssetInfoResult
+public sealed class AssetInfoResult
 {
     [JsonPropertyName("aclass")] public string? AssetClass { get; set; }
 

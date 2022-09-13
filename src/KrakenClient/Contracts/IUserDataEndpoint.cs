@@ -126,4 +126,18 @@ public interface IUserDataEndpoint
     /// <returns></returns>
     Task<ExportReportStatus?> GetExportReportStatus(string report);
 
+    /// <summary>
+    /// Retrieve a processed data export
+    /// </summary>
+    /// <param name="id">Report ID to retrieve</param>
+    /// <returns></returns>
+    Task<Stream?> RetrieveDataExport(string id);
+
+    /// <summary>
+    /// Delete exported trades/ledgers report
+    /// </summary>
+    /// <param name="id">ID of report to delete or cancel</param>
+    /// <param name="type">Enum: "cancel" "delete". delete can only be used for reports that have already been processed. Use cancel for queued or processing reports.</param>
+    /// <returns></returns>
+    Task<DeleteExportReport?> DeleteExportReport(string id, string type);
 }
