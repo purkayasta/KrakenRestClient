@@ -126,4 +126,10 @@ public interface IUserDataEndpoint
     /// <returns></returns>
     Task<ExportReportStatus?> GetExportReportStatus(string report);
 
+    /// <summary>
+    /// Retrieve a processed data export
+    /// </summary>
+    /// <param name="id">Report ID to retrieve</param>
+    /// <returns></returns>
+    Task<Stream?> RetrieveDataExport(string id);
 }
