@@ -3,7 +3,7 @@ using KrakenClient.Models.MarketData;
 
 namespace KrakenClient.Endpoints.MarketData;
 
-internal partial class MarketDataEndpoint : IMarketDataEndpoint
+internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string OrderBookUrl = "Depth";
 

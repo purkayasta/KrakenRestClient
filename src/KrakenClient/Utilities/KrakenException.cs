@@ -1,6 +1,6 @@
 namespace KrakenClient.Utilities;
 
-internal class KrakenException : Exception
+internal sealed class KrakenException : Exception
 {
     private KrakenException(string message) : base(message)
     {

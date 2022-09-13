@@ -5,7 +5,7 @@ using KrakenClient.Endpoints.UserData;
 
 namespace KrakenClient;
 
-internal class KrakenClient : IKrakenClient
+internal sealed class KrakenClient : IKrakenClient
 {
     private readonly Lazy<IMarketDataEndpoint> _marketDataEndpoint;
     private readonly Lazy<IUserDataEndpoint> _userDataEndpoint;

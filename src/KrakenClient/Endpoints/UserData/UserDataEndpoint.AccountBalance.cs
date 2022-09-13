@@ -3,7 +3,7 @@ using KrakenClient.Models.UserData;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 {
     private const string UserDataUrl = "Balance";
 
