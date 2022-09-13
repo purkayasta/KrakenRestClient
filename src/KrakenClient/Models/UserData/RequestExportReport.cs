@@ -1,10 +1,10 @@
 ﻿namespace KrakenClient.Models.UserData;
 
-public abstract class RequestExportReport : BaseResponse<RequestExportReportResult>
+public class RequestExportReport : BaseResponse<RequestExportReportResult>
 {
 }
 
-public abstract class RequestExportReportResult
+public sealed class RequestExportReportResult
 {
     [JsonPropertyName("id")] public string? Id { get; set; }
 }

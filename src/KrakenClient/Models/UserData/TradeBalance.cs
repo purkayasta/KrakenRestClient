@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.UserData;
 
-public abstract class TradeBalance : BaseResponse<TradeBalanceResult>
+public class TradeBalance : BaseResponse<TradeBalanceResult>
 {
 }
 
-public abstract class TradeBalanceResult
+public sealed class TradeBalanceResult
 {
     /// <summary>
     /// Equivalent balance (combined balance of all currencies)

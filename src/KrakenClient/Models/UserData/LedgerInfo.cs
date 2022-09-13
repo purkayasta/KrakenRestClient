@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.UserData;
 
-public abstract class LedgerInfo : BaseResponse<LedgerInfoResult>
+public class LedgerInfo : BaseResponse<LedgerInfoResult>
 {
 }
 
-public abstract class LedgerInfoResult
+public sealed class LedgerInfoResult
 {
     [JsonPropertyName("ledger")] public IDictionary<string, BaseLedgerInfo>? Ledger { get; set; }
 

@@ -1,5 +1,5 @@
 namespace KrakenClient.Models.UserData;
 
-public abstract class AccountBalance : BaseResponse<IDictionary<string, string>>
+public class AccountBalance : BaseResponse<IDictionary<string, string>>
 {
 }

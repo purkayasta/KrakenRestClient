@@ -1,5 +1,5 @@
 namespace KrakenClient.Models.MarketData;
 
-public abstract class OHLCData : BaseResponse<JsonObject>
+public class OHLCData : BaseResponse<JsonObject>
 {
 }

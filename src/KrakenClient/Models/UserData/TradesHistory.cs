@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.UserData;
 
-public abstract class TradesHistory : BaseResponse<TradesHistoryResult>
+public class TradesHistory : BaseResponse<TradesHistoryResult>
 {
 }
 
-public abstract class TradesHistoryResult
+public sealed class TradesHistoryResult
 {
     [JsonPropertyName("trades")] public IDictionary<string, BaseTradeInfo>? Trades { get; set; }
     

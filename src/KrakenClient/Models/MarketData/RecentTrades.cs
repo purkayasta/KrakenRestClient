@@ -1,6 +1,6 @@
 ﻿namespace KrakenClient.Models.MarketData;
 
-public abstract class RecentTrades : BaseResponse<JsonObject>
+public class RecentTrades : BaseResponse<JsonObject>
 {
 }
 
