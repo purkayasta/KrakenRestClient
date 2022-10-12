@@ -4,33 +4,47 @@ namespace KrakenClient.Core;
 
 internal sealed class KrakenHttpClient : IKrakenHttpClient
 {
+    #region Property
     public Dictionary<string, string> Headers { get; set; } = new();
     public Dictionary<string, string> BodyParameters { get; set; } = new();
-    
     private string BaseUrl { get; } = "api.kraken.com";
     private int Version { get; } = 0;
     private string Protocol { get; } = "https://";
-    
-    private readonly HttpClient _httpClient;
-    private readonly SemaphoreSlim _semaphore;
 
-    public KrakenHttpClient(HttpClient httpClient)
+    #endregion
+
+    #region Fields
+
+    private readonly SemaphoreSlim _semaphore;
+    private readonly IHttpClientFactory? _httpClientFactory = null;
+    private readonly HttpClient? _httpClient = null;
+
+    #endregion
+
+    public KrakenHttpClient(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+        Headers.TryAdd("User-Agent", "KrakenArp-V2");
+        _semaphore = new SemaphoreSlim(1);
+    }
+
+    internal KrakenHttpClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _httpClient.DefaultRequestHeaders.Clear();
         Headers.TryAdd("User-Agent", "KrakenArp-V2");
         _semaphore = new SemaphoreSlim(1);
     }
 
     public Task<T?> Get<T>(string url) where T : class
     {
-        _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
+        var httpClient = GetHttpClient();
+        httpClient.DefaultRequestHeaders.AddHeaders(Headers);
 
         if (BodyParameters.Count <= 0)
-            return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
+            return httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
 
         var stringContent = BodyParameters.ConvertToString();
-        return _httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}?{stringContent}");
+        return httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}?{stringContent}");
     }
 
     public async Task<T?> Post<T>(string url) where T : class
@@ -56,9 +70,11 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
 
             Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
             Headers.TryAdd("API-Sign", signKey);
-            _httpClient.DefaultRequestHeaders.AddHeaders(Headers);
 
-            var result = await _httpClient
+            var httpClient = GetHttpClient();
+            httpClient.DefaultRequestHeaders.AddHeaders(Headers);
+
+            var result = await httpClient
                 .PostAsync($"{Protocol}{BaseUrl}/{absoluteUri}", httpStrContent ?? null);
 
             if (result?.Content is null) return null;
@@ -69,5 +85,16 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
         {
             _semaphore.Release();
         }
+    }
+
+    private HttpClient GetHttpClient()
+    {
+        if (_httpClientFactory is null)
+        {
+            if (_httpClient is not null) return _httpClient;
+            throw new Exception("");
+        }
+
+        return _httpClientFactory.CreateClient();
     }
 }

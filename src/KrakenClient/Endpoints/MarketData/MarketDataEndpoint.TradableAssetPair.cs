@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -12,6 +13,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
         ArgumentNullException.ThrowIfNull(assetPair, nameof(assetPair));
 
         _httpClient.BodyParameters.Add("pair", assetPair);
-        return _httpClient.Get<TradeAbleAssetPair>(BaseUrl + TradeAssetUrl);
+        return _httpClient.Get<TradeAbleAssetPair>(KrakenConstants.PublicBaseUrl + TradeAssetUrl);
     }
 }

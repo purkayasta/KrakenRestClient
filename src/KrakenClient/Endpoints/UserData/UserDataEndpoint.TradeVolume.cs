@@ -15,6 +15,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         if (feeInfo.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.FeeInfo, feeInfo.Value.ToValueStr());
 
-        return _httpClient.Post<TradeVolume>(BaseUrl + TradeVolumeUrl);
+        return _httpClient.Post<TradeVolume>(KrakenConstants.PrivateBaseUrl + TradeVolumeUrl);
     }
 }

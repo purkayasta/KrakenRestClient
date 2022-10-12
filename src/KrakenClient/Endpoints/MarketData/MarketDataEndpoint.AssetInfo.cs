@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -7,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string AssetInfoUrl = "Assets";
 
-    public Task<AssetInfo?> GetAssetInfo() => _httpClient.Get<AssetInfo>(BaseUrl + AssetInfoUrl);
+    public Task<AssetInfo?> GetAssetInfo() => _httpClient.Get<AssetInfo>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
 
     public Task<AssetInfo?> GetAssetInfo(string asset, string aclass = "currency")
     {
@@ -17,6 +18,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
         _httpClient.BodyParameters.Add("asset", asset);
         _httpClient.BodyParameters.Add("aclass", aclass);
 
-        return _httpClient.Get<AssetInfo>(BaseUrl + AssetInfoUrl);
+        return _httpClient.Get<AssetInfo>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
     }
 }

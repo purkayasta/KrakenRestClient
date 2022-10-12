@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -13,6 +14,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 
         _httpClient.BodyParameters.Add("pair", pair);
 
-        return _httpClient.Get<TickerInformation>(BaseUrl + TickerUrl);
+        return _httpClient.Get<TickerInformation>(KrakenConstants.PublicBaseUrl + TickerUrl);
     }
 }

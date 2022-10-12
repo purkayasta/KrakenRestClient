@@ -1,5 +1,6 @@
 ﻿using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -14,6 +15,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
         _httpClient.BodyParameters.Add("pair", pair);
         _httpClient.BodyParameters.Add("count", count.ToString());
 
-        return _httpClient.Get<OrderBook>(BaseUrl + OrderBookUrl);
+        return _httpClient.Get<OrderBook>(KrakenConstants.PublicBaseUrl + OrderBookUrl);
     }
 }

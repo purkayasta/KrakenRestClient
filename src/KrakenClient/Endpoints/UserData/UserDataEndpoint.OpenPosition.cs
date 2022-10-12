@@ -17,6 +17,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Docalcs, docalcs.ToValueStr());
         _httpClient.BodyParameters.Add(KrakenParameter.Consolidation, consolidation);
 
-        return _httpClient.Post<OpenPositions>(BaseUrl + OpenPositionsUrl);
+        return _httpClient.Post<OpenPositions>(KrakenConstants.PrivateBaseUrl + OpenPositionsUrl);
     }
 }

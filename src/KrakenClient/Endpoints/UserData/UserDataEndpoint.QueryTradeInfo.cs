@@ -15,6 +15,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.TransactionId, transactionIds);
         _httpClient.BodyParameters.Add(KrakenParameter.Trade, trades.ToValueStr());
 
-        return _httpClient.Post<TradesInfo>(BaseUrl + QueryTradeInfoUrl);
+        return _httpClient.Post<TradesInfo>(KrakenConstants.PrivateBaseUrl + QueryTradeInfoUrl);
     }
 }

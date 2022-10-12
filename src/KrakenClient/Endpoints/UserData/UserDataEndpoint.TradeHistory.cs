@@ -18,6 +18,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         if (end.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.End, end.Value.ToString());
         if (offset.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.OffSet, offset.Value.ToString());
 
-        return _httpClient.Post<TradesHistory>(BaseUrl + QueryTradeHistoryUrl);
+        return _httpClient.Post<TradesHistory>(KrakenConstants.PrivateBaseUrl + QueryTradeHistoryUrl);
     }
 }

@@ -21,6 +21,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.CloseTime, closedTime);
 
-        return _httpClient.Post<ClosedOrders>(BaseUrl + ClosedOrderUrl);
+        return _httpClient.Post<ClosedOrders>(KrakenConstants.PrivateBaseUrl + ClosedOrderUrl);
     }
 }

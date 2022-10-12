@@ -18,6 +18,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         if (userReferenceId.HasValue)
             _httpClient.BodyParameters.Add(KrakenParameter.UserReferenceId, userReferenceId.Value.ToString());
 
-        return _httpClient.Post<OrdersInfo>(BaseUrl + QueryOrderInfoUrl);
+        return _httpClient.Post<OrdersInfo>(KrakenConstants.PrivateBaseUrl + QueryOrderInfoUrl);
     }
 }

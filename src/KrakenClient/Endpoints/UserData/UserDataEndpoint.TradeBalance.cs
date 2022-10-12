@@ -13,6 +13,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
 
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
-        return _httpClient.Post<TradeBalance>(BaseUrl + TradeBalanceUrl);
+        return _httpClient.Post<TradeBalance>(KrakenConstants.PrivateBaseUrl + TradeBalanceUrl);
     }
 }

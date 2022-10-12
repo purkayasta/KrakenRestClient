@@ -5,7 +5,7 @@ namespace KrakenClient.Installer;
 
 public static class KrakenFactoryInstaller
 {
-    public static IKrakenClient GetKrakenClient(IHttpClientFactory httpClientFactory, string apiKey, string secretKey)
+    public static IKrakenClient CreateClient(IHttpClientFactory httpClientFactory, string apiKey, string secretKey)
     {
         ArgumentNullException.ThrowIfNull(apiKey, "ApiKey");
         ArgumentNullException.ThrowIfNull(secretKey, "SecretKey");
@@ -13,7 +13,7 @@ public static class KrakenFactoryInstaller
         return CreateKrakenClient(httpClientFactory.CreateClient(), apiKey, secretKey);
     }
 
-    public static IKrakenClient GetKrakenClient(HttpClient httpClient, string apiKey, string secretKey)
+    public static IKrakenClient CreateClient(HttpClient httpClient, string apiKey, string secretKey)
     {
         ArgumentNullException.ThrowIfNull(apiKey, "ApiKey");
         ArgumentNullException.ThrowIfNull(secretKey, "SecretKey");

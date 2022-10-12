@@ -22,7 +22,7 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         if (endtm.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.End, endtm.Value.ToString());
 
 
-        return _httpClient.Post<RequestExportReport>(BaseUrl + "AddExport");
+        return _httpClient.Post<RequestExportReport>(KrakenConstants.PrivateBaseUrl + "AddExport");
     }
 
     public Task<ExportReportStatus?> GetExportReportStatus(string report)
@@ -31,7 +31,7 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.Report, report);
 
-        return _httpClient.Post<ExportReportStatus>(BaseUrl + "ExportStatus");
+        return _httpClient.Post<ExportReportStatus>(KrakenConstants.PrivateBaseUrl + "ExportStatus");
     }
 
     public Task<Stream?> RetrieveDataExport(string id)
@@ -40,7 +40,7 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
 
-        return _httpClient.Post<Stream>(BaseUrl + "RetrieveExport");
+        return _httpClient.Post<Stream>(KrakenConstants.PrivateBaseUrl + "RetrieveExport");
     }
 
     public Task<DeleteExportReport?> DeleteExportReport(string id, string type)
@@ -51,6 +51,6 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
         _httpClient.BodyParameters.Add(KrakenParameter.Type, type);
 
-        return _httpClient.Post<DeleteExportReport>(BaseUrl + "RemoveExport");
+        return _httpClient.Post<DeleteExportReport>(KrakenConstants.PrivateBaseUrl + "RemoveExport");
     }
 }
