@@ -1,14 +1,14 @@
-using KrakenClient.Contracts;
 using KrakenClient.Models.UserData;
 using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint
 {
     private const string ClosedOrderUrl = "ClosedOrders";
 
-    public Task<ClosedOrders?> GetClosedOrders(bool trades = false, int? userReferenceId = null, int? startTime = null,
+    public async Task<ClosedOrders?> GetClosedOrders(bool trades = false, int? userReferenceId = null,
+        int? startTime = null,
         int? endTime = null, int? offset = null, string closedTime = "both")
     {
         _httpClient.BodyParameters.Add(KrakenParameter.Trade, trades.ToValueStr());
@@ -21,6 +21,21 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.CloseTime, closedTime);
 
-        return _httpClient.Post<ClosedOrders>(KrakenConstants.PrivateBaseUrl + ClosedOrderUrl);
+        ClosedOrders? result;
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<ClosedOrders>(KrakenConstants.PrivateBaseUrl + ClosedOrderUrl);
+        }
+        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
+        {
+            throw;
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

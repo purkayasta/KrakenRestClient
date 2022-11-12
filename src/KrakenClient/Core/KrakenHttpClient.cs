@@ -5,6 +5,7 @@ namespace KrakenClient.Core;
 internal sealed class KrakenHttpClient : IKrakenHttpClient
 {
     #region Property
+
     public Dictionary<string, string> Headers { get; set; } = new();
     public Dictionary<string, string> BodyParameters { get; set; } = new();
     private string BaseUrl { get; } = "api.kraken.com";
@@ -15,7 +16,6 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
 
     #region Fields
 
-    private readonly SemaphoreSlim _semaphore;
     private readonly IHttpClientFactory? _httpClientFactory = null;
     private readonly HttpClient? _httpClient = null;
 
@@ -25,20 +25,18 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
     {
         _httpClientFactory = httpClientFactory;
         Headers.TryAdd("User-Agent", "KrakenArp-V2");
-        _semaphore = new SemaphoreSlim(1);
     }
 
     internal KrakenHttpClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
         Headers.TryAdd("User-Agent", "KrakenArp-V2");
-        _semaphore = new SemaphoreSlim(1);
     }
 
     public Task<T?> Get<T>(string url) where T : class
     {
         var httpClient = GetHttpClient();
-        httpClient.DefaultRequestHeaders.AddHeaders(Headers);
+        httpClient!.DefaultRequestHeaders.AddHeaders(Headers);
 
         if (BodyParameters.Count <= 0)
             return httpClient.GetFromJsonAsync<T>($"{Protocol}{BaseUrl}/{Version}/{url}");
@@ -49,52 +47,44 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
 
     public async Task<T?> Post<T>(string url) where T : class
     {
-        await _semaphore.WaitAsync();
-        try
-        {
-            ArgumentNullException.ThrowIfNull(KrakenAuth.ApiKey, nameof(KrakenAuth.ApiKey));
-            ArgumentNullException.ThrowIfNull(Headers, "Invalid Headers found");
+        ArgumentNullException.ThrowIfNull(KrakenAuth.ApiKey, nameof(KrakenAuth.ApiKey));
+        ArgumentNullException.ThrowIfNull(Headers, "Invalid Headers found");
 
-            var nonce = NonceGenerator.GetNonce();
-            BodyParameters.TryAdd("nonce", nonce);
+        var nonce = NonceGenerator.GetNonce();
+        BodyParameters.TryAdd("nonce", nonce);
 
-            var body = BodyParameters.ConvertToString();
-            var absoluteUri = $"/{Version}/{url}";
-            var signKey = KrakenAuth.CreateAuthSignature(nonce, absoluteUri, body);
+        var body = BodyParameters.ConvertToString();
+        var absoluteUri = $"/{Version}/{url}";
+        var signKey = KrakenAuth.CreateAuthSignature(nonce, absoluteUri, body);
 
-            ArgumentNullException.ThrowIfNull(signKey, "Invalid Sign Key Generated!!");
+        ArgumentNullException.ThrowIfNull(signKey, "Invalid Sign Key Generated!!");
 
-            StringContent? httpStrContent = null;
-            if (body is not null)
-                httpStrContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
+        StringContent? httpStrContent = null;
+        if (body is not null)
+            httpStrContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
 
-            Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
-            Headers.TryAdd("API-Sign", signKey);
+        Headers.TryAdd("API-Key", KrakenAuth.ApiKey);
+        Headers.TryAdd("API-Sign", signKey);
 
-            var httpClient = GetHttpClient();
-            httpClient.DefaultRequestHeaders.AddHeaders(Headers);
+        var httpClient = GetHttpClient();
+        httpClient!.DefaultRequestHeaders.AddHeaders(Headers);
 
-            var result = await httpClient
-                .PostAsync($"{Protocol}{BaseUrl}/{absoluteUri}", httpStrContent ?? null);
+        var result = await httpClient
+            .PostAsync($"{Protocol}{BaseUrl}/{absoluteUri}", httpStrContent ?? null);
 
-            if (result?.Content is null) return null;
+        if (result?.Content is null) return null;
 
-            return await JsonSerializer.DeserializeAsync<T>(await result.Content.ReadAsStreamAsync());
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
+        return await JsonSerializer
+            .DeserializeAsync<T>(await result.Content
+                .ReadAsStreamAsync().ConfigureAwait(false))
+            .ConfigureAwait(false);
     }
 
-    private HttpClient GetHttpClient()
+    private HttpClient? GetHttpClient()
     {
-        if (_httpClientFactory is null)
-        {
-            if (_httpClient is not null) return _httpClient;
-            throw new Exception("");
-        }
-
-        return _httpClientFactory.CreateClient();
+        if (_httpClientFactory is not null) return _httpClientFactory.CreateClient();
+        if (_httpClient is not null) return _httpClient;
+        KrakenException.Throw("HttpClient is invalid");
+        return null;
     }
 }

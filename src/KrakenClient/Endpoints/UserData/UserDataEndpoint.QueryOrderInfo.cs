@@ -1,14 +1,14 @@
-using KrakenClient.Contracts;
 using KrakenClient.Models.UserData;
 using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint
 {
     private const string QueryOrderInfoUrl = "QueryOrders";
 
-    public Task<OrdersInfo?> QueryOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false)
+    public async Task<OrdersInfo?> QueryOrdersInfo(string transactionIds, int? userReferenceId = null,
+        bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
 
@@ -18,6 +18,22 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         if (userReferenceId.HasValue)
             _httpClient.BodyParameters.Add(KrakenParameter.UserReferenceId, userReferenceId.Value.ToString());
 
-        return _httpClient.Post<OrdersInfo>(KrakenConstants.PrivateBaseUrl + QueryOrderInfoUrl);
+        OrdersInfo? result;
+
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<OrdersInfo>(KrakenConstants.PrivateBaseUrl + QueryOrderInfoUrl);
+        }
+        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
+        {
+            throw;
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

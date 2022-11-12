@@ -1,14 +1,13 @@
-using KrakenClient.Contracts;
 using KrakenClient.Models.UserData;
 using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint
 {
     private const string OpenPositionsUrl = "OpenPositions";
 
-    public Task<OpenPositions?> GetOpenPositions(string transactionIds, bool docalcs = false,
+    public async Task<OpenPositions?> GetOpenPositions(string transactionIds, bool docalcs = false,
         string consolidation = "market")
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
@@ -17,6 +16,22 @@ internal sealed partial class UserDataEndpoint : IUserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Docalcs, docalcs.ToValueStr());
         _httpClient.BodyParameters.Add(KrakenParameter.Consolidation, consolidation);
 
-        return _httpClient.Post<OpenPositions>(KrakenConstants.PrivateBaseUrl + OpenPositionsUrl);
+        OpenPositions? result;
+
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<OpenPositions>(KrakenConstants.PrivateBaseUrl + OpenPositionsUrl);
+        }
+        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
+        {
+            throw;
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

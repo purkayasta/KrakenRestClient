@@ -3,7 +3,7 @@ using KrakenClient.Core;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint : BaseEndpoint, IUserDataEndpoint
 {
     private readonly IKrakenHttpClient _httpClient;
 
