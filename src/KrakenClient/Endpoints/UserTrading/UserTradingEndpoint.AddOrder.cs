@@ -1,8 +1,6 @@
-﻿using KrakenClient.Contracts;
+﻿namespace KrakenClient.Endpoints.UserTrading;
 
-namespace KrakenClient.Endpoints.UserTrading;
-
-internal sealed partial class UserTradingEndpoint : IUserTradingEndpoint
+internal sealed partial class UserTradingEndpoint
 {
     public Task AddOrder()
     {
