@@ -46,4 +46,7 @@ public static class Extensions
             false => "false",
         };
     }
+
+    public static bool IsEmpty(this string? strValue) =>
+        string.IsNullOrEmpty(strValue) || string.IsNullOrWhiteSpace(strValue);
 }

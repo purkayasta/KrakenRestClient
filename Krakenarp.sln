@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenClient", "src\KrakenC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net6-web-api", "demos\net6-web-api\net6-web-api.csproj", "{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net-web-api", "demos\net-web-api\net-web-api.csproj", "{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__solution-items", "__solution-items", "{36542FC2-B7B3-4EDA-848B-9990D246B0E9}"
 	ProjectSection(SolutionItems) = preProject
