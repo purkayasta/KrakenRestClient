@@ -2,5 +2,5 @@
 
 internal abstract class BaseEndpoint
 {
-    internal static SemaphoreSlim CustomSemaphore = new SemaphoreSlim(1, 1);
+    internal static readonly SemaphoreSlim CustomSemaphore = new SemaphoreSlim(1, 1);
 }

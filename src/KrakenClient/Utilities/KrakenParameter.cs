@@ -39,4 +39,5 @@ internal static class KrakenParameter
     internal const string DeadLine = "deadline";
     internal const string Validate = "validate";
     internal const string Orders = "orders";
+    internal const string CancelResponse = "cancel_response";
 }
