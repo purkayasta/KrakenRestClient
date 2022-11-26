@@ -70,8 +70,33 @@ internal sealed partial class UserTradingEndpoint
         return result;
     }
 
-    public Task AddOrderBatch()
+    public async Task<AddBatchOrder?> AddOrderBatchAsync(AddBatchOrderRequest? requests)
     {
-        return Task.CompletedTask;
+        if (requests is null) KrakenException.Throw(nameof(AddBatchOrderRequest) + " is null");
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Pair, requests!.Pair);
+        if (requests!.DeadLine.IsEmpty()) _httpClient.BodyParameters.Add(KrakenParameter.DeadLine, requests!.DeadLine!);
+        if (requests!.Validate) _httpClient.BodyParameters.Add(KrakenParameter.Validate, requests!.Validate.ToString());
+
+        if (requests!.AddOrderRequest.Length >= 15) KrakenException.Throw("Cannot order more than 15 order request");
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Orders, requests!.AddOrderRequest!.ToStr());
+
+        AddBatchOrder? result = null;
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<AddBatchOrder>(KrakenConstants.PrivateBaseUrl + AddBatchOrderUrl);
+        }
+        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
+        {
+            throw;
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

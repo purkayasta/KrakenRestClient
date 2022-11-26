@@ -38,4 +38,5 @@ internal static class KrakenParameter
     internal const string ConditionalCloseOrderPrice2 = "close[price2]";
     internal const string DeadLine = "deadline";
     internal const string Validate = "validate";
+    internal const string Orders = "orders";
 }

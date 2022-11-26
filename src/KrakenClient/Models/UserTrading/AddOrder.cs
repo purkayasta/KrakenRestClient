@@ -1,10 +1,10 @@
 ﻿namespace KrakenClient.Models.UserTrading;
 
-public class AddOrder : BaseResponse<IDictionary<string, string>>
+public class AddOrder : BaseResponse<AddOrderResult>
 {
 }
 
-public class AddOrderResult
+public abstract class AddOrderResult
 {
     /// <summary>
     /// Order description info
@@ -19,7 +19,7 @@ public class AddOrderResult
     public string[]? TransactionIds { get; set; }
 }
 
-public class AddOrderDescription
+public abstract class AddOrderDescription
 {
     /// <summary>
     /// Order description

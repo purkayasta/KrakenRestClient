@@ -75,8 +75,7 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
         if (result?.Content is null) return null;
 
         return await JsonSerializer
-            .DeserializeAsync<T>(await result.Content
-                .ReadAsStreamAsync().ConfigureAwait(false))
+            .DeserializeAsync<T>(await result.Content.ReadAsStreamAsync().ConfigureAwait(false))
             .ConfigureAwait(false);
     }
 
