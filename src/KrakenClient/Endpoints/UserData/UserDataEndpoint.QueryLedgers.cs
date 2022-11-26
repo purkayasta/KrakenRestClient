@@ -1,20 +1,35 @@
-using KrakenClient.Contracts;
 using KrakenClient.Models.UserData;
 using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint
 {
     private const string QueryLedgersUrl = "QueryLedgers";
 
-    public Task<Ledgers?> QueryLedgers(string id, bool trades = false)
+    public async Task<LedgerResponse?> QueryLedgers(string id, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
 
         _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
         _httpClient.BodyParameters.Add(KrakenParameter.Trade, trades.ToValueStr());
 
-        return _httpClient.Post<Ledgers>(BaseUrl + QueryLedgersUrl);
+        LedgerResponse? result;
+
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<LedgerResponse>(KrakenConstants.PrivateBaseUrl + QueryLedgersUrl);
+        }
+        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
+        {
+            throw;
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

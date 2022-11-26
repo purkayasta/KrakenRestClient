@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using KrakenClient.Models.UserTrading;
 
 namespace KrakenClient.Utilities;
 
@@ -38,6 +39,9 @@ public static class Extensions
         return stringBuilder.ToString();
     }
 
+    public static string ToStr(this object? request) =>
+        request is not null ? JsonSerializer.Serialize(request) : string.Empty;
+
     public static string ToValueStr(this bool booleanValue)
     {
         return booleanValue switch
@@ -46,4 +50,7 @@ public static class Extensions
             false => "false",
         };
     }
+
+    public static bool IsEmpty(this string? strValue) =>
+        string.IsNullOrEmpty(strValue) || string.IsNullOrWhiteSpace(strValue);
 }

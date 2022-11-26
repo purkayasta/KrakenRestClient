@@ -1,5 +1,6 @@
 ﻿using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -7,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string RecentSpreadUrl = "Spread";
 
-    public Task<RecentSpreads?> GetRecentSpreads(string pair, int? since = null)
+    public Task<RecentSpreadsResponse?> GetRecentSpreads(string pair, int? since = null)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 
@@ -15,6 +16,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 
         if (since is not null) _httpClient.BodyParameters.Add("since", since.Value.ToString());
 
-        return _httpClient.Get<RecentSpreads>(BaseUrl + RecentSpreadUrl);
+        return _httpClient.Get<RecentSpreadsResponse>(KrakenConstants.PublicBaseUrl + RecentSpreadUrl);
     }
 }

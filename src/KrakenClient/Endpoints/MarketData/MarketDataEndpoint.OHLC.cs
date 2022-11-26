@@ -1,5 +1,6 @@
 using KrakenClient.Contracts;
 using KrakenClient.Models.MarketData;
+using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.MarketData;
 
@@ -7,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string OhlcUrl = "OHLC";
 
-    public Task<OHLCData?> GetOhlcData(string pair, int? since = null, int interval = 1)
+    public Task<OHLCDataResponse?> GetOhlcData(string pair, int? since = null, int interval = 1)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 
@@ -15,6 +16,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
         _httpClient.BodyParameters.Add("interval", interval.ToString());
         if (since is not null) _httpClient.BodyParameters.Add("since", since.Value.ToString());
 
-        return _httpClient.Get<OHLCData>(BaseUrl + OhlcUrl);
+        return _httpClient.Get<OHLCDataResponse>(KrakenConstants.PublicBaseUrl + OhlcUrl);
     }
 }

@@ -4,15 +4,28 @@ using KrakenClient.Utilities;
 
 namespace KrakenClient.Endpoints.UserData;
 
-internal sealed partial class UserDataEndpoint : IUserDataEndpoint
+internal sealed partial class UserDataEndpoint
 {
     private const string TradeBalanceUrl = "TradeBalance";
 
-    public Task<TradeBalance?> GetTradeBalance(string asset = "ZUSD")
+    public async Task<TradeBalanceResponse?> GetTradeBalance(string asset = "ZUSD")
     {
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
 
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
-        return _httpClient.Post<TradeBalance>(BaseUrl + TradeBalanceUrl);
+
+        TradeBalanceResponse? result;
+        
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            result = await _httpClient.Post<TradeBalanceResponse>(KrakenConstants.PrivateBaseUrl + TradeBalanceUrl);
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return result;
     }
 }

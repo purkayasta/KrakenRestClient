@@ -6,7 +6,6 @@ namespace KrakenClient.Endpoints.MarketData;
 internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private readonly IKrakenHttpClient _httpClient;
-    private const string BaseUrl = "public/";
 
     public MarketDataEndpoint(IKrakenHttpClient httpClient)
     {

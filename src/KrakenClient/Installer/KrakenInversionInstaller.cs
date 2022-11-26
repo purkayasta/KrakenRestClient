@@ -7,10 +7,10 @@ namespace KrakenClient.Installer;
 public static class KrakenInversionInstaller
 {
     /// <summary>
-    /// For private methods
+    /// Re commanded way to add kraken into the project 
     /// </summary>
     /// <param name="serviceCollection"></param>
-    /// <param name="apiKey">Kraken Api Key</param>
+    /// <param name="apiKey">Kraken API Key</param>
     /// <param name="secretKey">Kraken Secret Key</param>
     public static void AddKraken(this IServiceCollection serviceCollection, string apiKey, string secretKey)
     {
@@ -24,7 +24,7 @@ public static class KrakenInversionInstaller
         KrakenAuth.ApiKey = apiKey;
         KrakenAuth.SecretKey = secretKey;
     }
-    
+
     /// <summary>
     /// For Public Methods Only
     /// </summary>

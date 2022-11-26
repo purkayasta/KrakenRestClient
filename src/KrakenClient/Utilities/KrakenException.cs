@@ -13,4 +13,6 @@ internal sealed class KrakenException : Exception
             throw new KrakenException($"{paramName} cannot be null or empty");
         }
     }
+
+    internal static void Throw(string message) => throw new KrakenException(message);
 }
