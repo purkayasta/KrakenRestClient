@@ -8,19 +8,19 @@ public interface IUserDataEndpoint
     /// Retrieve all cash balances, net of pending withdrawals.
     /// </summary>
     /// <returns></returns>
-    Task<AccountBalance?> GetAccountBalance();
+    Task<AccountBalanceResponse?> GetAccountBalance();
 
     /// <summary>
     /// Retrieve information about currently open orders.
     /// </summary>
-    Task<OpenOrders?> GetOpenOrders(bool trades = false, int? userReferenceId = null);
+    Task<OpenOrderResponse?> GetOpenOrders(bool trades = false, int? userReferenceId = null);
 
     /// <summary>
     /// Retrieve a summary of collateral balances, margin position valuations, equity and margin level.
     /// </summary>
     /// <param name="asset">ZUSD</param>
     /// <returns></returns>
-    Task<TradeBalance?> GetTradeBalance(string asset = "ZUSD");
+    Task<TradeBalanceResponse?> GetTradeBalance(string asset = "ZUSD");
 
     /// <summary>
     /// Retrieve information about orders that have been closed (filled or cancelled). 50 results are returned at a time, the most recent by default.
@@ -33,7 +33,7 @@ public interface IUserDataEndpoint
     /// <param name="offset"></param>
     /// <param name="closedTime">both</param>
     /// <returns></returns>
-    Task<ClosedOrders?> GetClosedOrders(bool trades = false, int? userReferenceId = null, int? startTime = null,
+    Task<ClosedOrderResponse?> GetClosedOrders(bool trades = false, int? userReferenceId = null, int? startTime = null,
         int? endTime = null, int? offset = null, string closedTime = "both");
 
     /// <summary>
@@ -43,7 +43,7 @@ public interface IUserDataEndpoint
     /// <param name="userReferenceId">Restrict results to given user reference id</param>
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
-    Task<OrdersInfo?> QueryOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
+    Task<OrdersInfoResponse?> QueryOrdersInfo(string transactionIds, int? userReferenceId = null, bool trades = false);
 
     /// <summary>
     /// Retrieve information about trades/fills. 50 results are returned at a time, the most recent by default.
@@ -54,7 +54,7 @@ public interface IUserDataEndpoint
     /// <param name="end">Ending unix timestamp or trade tx ID of results (inclusive)</param>
     /// <param name="offset">Result offset for pagination</param>
     /// <returns></returns>
-    Task<TradesHistory?> GetTradesHistory(string type = "all", bool trades = false, int? start = null,
+    Task<TradesHistoryResponse?> GetTradesHistory(string type = "all", bool trades = false, int? start = null,
         int? end = null, int? offset = null);
 
     /// <summary>
@@ -63,7 +63,7 @@ public interface IUserDataEndpoint
     /// <param name="transactionIds">Comma delimited list of transaction IDs to query info about (20 maximum)</param>
     /// <param name="trades">Whether or not to include trades related to position in output</param>
     /// <returns></returns>
-    Task<TradesInfo?> QueryTradesInfo(string transactionIds, bool trades = false);
+    Task<TradesInfoResponse?> QueryTradesInfo(string transactionIds, bool trades = false);
 
     /// <summary>
     /// Get information about open margin positions.
@@ -72,7 +72,7 @@ public interface IUserDataEndpoint
     /// <param name="docalcs">Whether to include P&L calculations</param>
     /// <param name="consolidation">Consolidate positions by market/pair</param>
     /// <returns></returns>
-    Task<OpenPositions?> GetOpenPositions(string transactionIds, bool docalcs = false,
+    Task<OpenPositionsResponse?> GetOpenPositions(string transactionIds, bool docalcs = false,
         string consolidation = "market");
 
     /// <summary>
@@ -85,7 +85,7 @@ public interface IUserDataEndpoint
     /// <param name="end">Ending unix timestamp or ledger ID of results (inclusive)</param>
     /// <param name="offset">Result offset for pagination</param>
     /// <returns></returns>
-    Task<LedgerInfo?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
+    Task<LedgerInfoResponse?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
         int? start = null, int? end = null, int? offset = null);
 
     /// <summary>
@@ -94,7 +94,7 @@ public interface IUserDataEndpoint
     /// <param name="id">Comma delimited list of ledger IDs to query info about (20 maximum)</param>
     /// <param name="trades">Whether or not to include trades related to position in output. Default = false</param>
     /// <returns></returns>
-    Task<Ledgers?> QueryLedgers(string id, bool trades = false);
+    Task<LedgerResponse?> QueryLedgers(string id, bool trades = false);
 
     /// <summary>
     /// If an asset pair is on a maker/taker fee schedule, the taker side is given in fees and maker side in fees_maker. For pairs not on maker/taker, they will only be given in fees.
@@ -102,7 +102,7 @@ public interface IUserDataEndpoint
     /// <param name="pair">Comma delimited list of asset pairs to get fee info on (optional)</param>
     /// <param name="feeInfo">Whether or not to include fee info in results (optional)</param>
     /// <returns></returns>
-    Task<TradeVolume?> GetTradeVolume(string? pair = null, bool? feeInfo = null);
+    Task<TradeVolumeResponse?> GetTradeVolume(string? pair = null, bool? feeInfo = null);
 
     /// <summary>
     /// Request export of trades or ledgers.
@@ -117,14 +117,14 @@ public interface IUserDataEndpoint
     /// <param name="starttm">UNIX timestamp for report start time (default 1st of the current month)</param>
     /// <param name="endtm">UNIX timestamp for report end time (default now)</param>
     /// <returns></returns>
-    Task<RequestExportReport?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null);
+    Task<RequestExportReportResponse?> RequestExportReport(string report, string description, string format = "csv", string fields = "all", int? starttm = null, int? endtm = null);
 
     /// <summary>
     /// Get status of requested data exports.
     /// </summary>
     /// <param name="report">Type of reports to inquire about. Enum: "trades" "ledgers"</param>
     /// <returns></returns>
-    Task<ExportReportStatus?> GetExportReportStatus(string report);
+    Task<ExportReportStatusResponse?> GetExportReportStatus(string report);
 
     /// <summary>
     /// Retrieve a processed data export
@@ -139,5 +139,5 @@ public interface IUserDataEndpoint
     /// <param name="id">ID of report to delete or cancel</param>
     /// <param name="type">Enum: "cancel" "delete". delete can only be used for reports that have already been processed. Use cancel for queued or processing reports.</param>
     /// <returns></returns>
-    Task<DeleteExportReport?> DeleteExportReport(string id, string type);
+    Task<DeleteExportReportResponse?> DeleteExportReport(string id, string type);
 }

@@ -4,6 +4,6 @@ namespace KrakenClient.Contracts;
 
 public interface IUserTradingEndpoint
 {
-    Task<AddOrder?> AddOrderAsync(AddOrderRequest? request);
-    Task<AddBatchOrder?> AddOrderBatchAsync(AddBatchOrderRequest? requests);
+    Task<AddOrderResponse?> AddOrderAsync(AddOrderRequest? request);
+    Task<AddBatchOrderResponse?> AddOrderBatchAsync(AddBatchOrderRequest? requests);
 }

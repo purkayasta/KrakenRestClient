@@ -7,19 +7,19 @@ internal sealed partial class UserDataEndpoint
 {
     private const string TradeVolumeUrl = "TradeVolume";
 
-    public async Task<TradeVolume?> GetTradeVolume(string? pair = null, bool? feeInfo = null)
+    public async Task<TradeVolumeResponse?> GetTradeVolume(string? pair = null, bool? feeInfo = null)
     {
         if (!string.IsNullOrEmpty(pair) || !string.IsNullOrWhiteSpace(pair))
             _httpClient.BodyParameters.Add(KrakenParameter.Pair, pair);
 
         if (feeInfo.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.FeeInfo, feeInfo.Value.ToValueStr());
 
-        TradeVolume? result;
+        TradeVolumeResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<TradeVolume>(KrakenConstants.PrivateBaseUrl + TradeVolumeUrl);
+            result = await _httpClient.Post<TradeVolumeResponse>(KrakenConstants.PrivateBaseUrl + TradeVolumeUrl);
         }
         finally
         {

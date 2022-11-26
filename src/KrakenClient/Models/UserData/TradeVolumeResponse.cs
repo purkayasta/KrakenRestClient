@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.UserData;
 
-public class TradeVolume : BaseResponse<TradeVolumeResult>
+public class TradeVolumeResponse : BaseResponse<TradeVolume>
 {
 }
 
-public sealed class TradeVolumeResult
+public abstract class TradeVolume
 {
     /// <summary>
     /// Volume currency

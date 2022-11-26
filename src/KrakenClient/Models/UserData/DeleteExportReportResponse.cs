@@ -1,10 +1,10 @@
 ﻿namespace KrakenClient.Models.UserData;
 
-public class DeleteExportReport : BaseResponse<DeleteExportReportResult>
+public class DeleteExportReportResponse : BaseResponse<DeleteExportReport>
 {
 }
 
-public sealed class DeleteExportReportResult
+public abstract class DeleteExportReport
 {
     /// <summary>
     /// Whether deletion was successful

@@ -8,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string RecentSpreadUrl = "Spread";
 
-    public Task<RecentSpreads?> GetRecentSpreads(string pair, int? since = null)
+    public Task<RecentSpreadsResponse?> GetRecentSpreads(string pair, int? since = null)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 
@@ -16,6 +16,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 
         if (since is not null) _httpClient.BodyParameters.Add("since", since.Value.ToString());
 
-        return _httpClient.Get<RecentSpreads>(KrakenConstants.PublicBaseUrl + RecentSpreadUrl);
+        return _httpClient.Get<RecentSpreadsResponse>(KrakenConstants.PublicBaseUrl + RecentSpreadUrl);
     }
 }

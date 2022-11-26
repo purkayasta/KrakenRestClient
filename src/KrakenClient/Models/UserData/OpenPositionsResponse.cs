@@ -1,10 +1,10 @@
 namespace KrakenClient.Models.UserData;
 
-public class OpenPositions : BaseResponse<IDictionary<string, OpenPositionResult>>
+public class OpenPositionsResponse : BaseResponse<IDictionary<string, OpenPosition>>
 {
 }
 
-public sealed class OpenPositionResult
+public abstract class OpenPosition
 {
     /// <summary>
     /// Order ID responsible for the position

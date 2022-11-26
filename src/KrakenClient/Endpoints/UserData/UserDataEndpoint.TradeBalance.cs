@@ -8,18 +8,18 @@ internal sealed partial class UserDataEndpoint
 {
     private const string TradeBalanceUrl = "TradeBalance";
 
-    public async Task<TradeBalance?> GetTradeBalance(string asset = "ZUSD")
+    public async Task<TradeBalanceResponse?> GetTradeBalance(string asset = "ZUSD")
     {
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
 
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
 
-        TradeBalance? result;
+        TradeBalanceResponse? result;
         
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<TradeBalance>(KrakenConstants.PrivateBaseUrl + TradeBalanceUrl);
+            result = await _httpClient.Post<TradeBalanceResponse>(KrakenConstants.PrivateBaseUrl + TradeBalanceUrl);
         }
         finally
         {

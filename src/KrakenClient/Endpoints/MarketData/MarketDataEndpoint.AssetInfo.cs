@@ -8,9 +8,9 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string AssetInfoUrl = "Assets";
 
-    public Task<AssetInfo?> GetAssetInfo() => _httpClient.Get<AssetInfo>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
+    public Task<AssetInfoResponse?> GetAssetInfo() => _httpClient.Get<AssetInfoResponse>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
 
-    public Task<AssetInfo?> GetAssetInfo(string asset, string aclass = "currency")
+    public Task<AssetInfoResponse?> GetAssetInfo(string asset, string aclass = "currency")
     {
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
         ArgumentNullException.ThrowIfNull(aclass, nameof(aclass));
@@ -18,6 +18,6 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
         _httpClient.BodyParameters.Add("asset", asset);
         _httpClient.BodyParameters.Add("aclass", aclass);
 
-        return _httpClient.Get<AssetInfo>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
+        return _httpClient.Get<AssetInfoResponse>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
     }
 }

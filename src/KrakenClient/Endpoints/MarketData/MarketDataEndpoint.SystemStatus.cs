@@ -8,5 +8,5 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string SystemStatusUrl = "SystemStatus";
 
-    public Task<SystemStatus?> GetSystemStatus() => _httpClient.Get<SystemStatus>(KrakenConstants.PublicBaseUrl + SystemStatusUrl);
+    public Task<SystemStatusResponse?> GetSystemStatus() => _httpClient.Get<SystemStatusResponse>(KrakenConstants.PublicBaseUrl + SystemStatusUrl);
 }

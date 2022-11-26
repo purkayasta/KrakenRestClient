@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string LedgerInfoUrl = "Ledgers";
 
-    public async Task<LedgerInfo?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
+    public async Task<LedgerInfoResponse?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
         int? start = null, int? end = null, int? offset = null)
     {
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
@@ -18,11 +18,11 @@ internal sealed partial class UserDataEndpoint
         if (end.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.End, end.Value.ToString());
         if (offset.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.OffSet, offset.Value.ToString());
 
-        LedgerInfo? result;
+        LedgerInfoResponse? result;
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<LedgerInfo>(KrakenConstants.PrivateBaseUrl + LedgerInfoUrl);
+            result = await _httpClient.Post<LedgerInfoResponse>(KrakenConstants.PrivateBaseUrl + LedgerInfoUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {

@@ -7,14 +7,14 @@ internal sealed partial class UserDataEndpoint
 {
     private const string UserDataUrl = "Balance";
 
-    public async Task<AccountBalance?> GetAccountBalance()
+    public async Task<AccountBalanceResponse?> GetAccountBalance()
     {
-        AccountBalance? result;
+        AccountBalanceResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<AccountBalance>(KrakenConstants.PrivateBaseUrl + UserDataUrl);
+            result = await _httpClient.Post<AccountBalanceResponse>(KrakenConstants.PrivateBaseUrl + UserDataUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {

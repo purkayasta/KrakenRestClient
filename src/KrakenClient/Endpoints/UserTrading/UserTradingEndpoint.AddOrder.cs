@@ -8,11 +8,11 @@ internal sealed partial class UserTradingEndpoint
     private const string AddOrderUrl = "AddOrder";
     private const string AddBatchOrderUrl = "AddOrderBatch";
 
-    public async Task<AddOrder?> AddOrderAsync(AddOrderRequest? request)
+    public async Task<AddOrderResponse?> AddOrderAsync(AddOrderRequest? request)
     {
         if (request is null) KrakenException.Throw("Request Parameter is null");
 
-        AddOrder? result = null;
+        AddOrderResponse? result = null;
 
         if (request!.UserReferenceId.HasValue)
             _httpClient.BodyParameters.Add(KrakenParameter.UserReferenceId, request!.UserReferenceId.Value.ToString());
@@ -56,7 +56,7 @@ internal sealed partial class UserTradingEndpoint
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<AddOrder>(KrakenConstants.PrivateBaseUrl + AddOrderUrl);
+            result = await _httpClient.Post<AddOrderResponse>(KrakenConstants.PrivateBaseUrl + AddOrderUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {
@@ -70,7 +70,7 @@ internal sealed partial class UserTradingEndpoint
         return result;
     }
 
-    public async Task<AddBatchOrder?> AddOrderBatchAsync(AddBatchOrderRequest? requests)
+    public async Task<AddBatchOrderResponse?> AddOrderBatchAsync(AddBatchOrderRequest? requests)
     {
         if (requests is null) KrakenException.Throw(nameof(AddBatchOrderRequest) + " is null");
 
@@ -82,11 +82,11 @@ internal sealed partial class UserTradingEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.Orders, requests!.AddOrderRequest!.ToStr());
 
-        AddBatchOrder? result = null;
+        AddBatchOrderResponse? result = null;
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<AddBatchOrder>(KrakenConstants.PrivateBaseUrl + AddBatchOrderUrl);
+            result = await _httpClient.Post<AddBatchOrderResponse>(KrakenConstants.PrivateBaseUrl + AddBatchOrderUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {

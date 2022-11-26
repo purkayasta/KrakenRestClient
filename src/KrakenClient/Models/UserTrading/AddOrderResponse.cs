@@ -1,10 +1,10 @@
 ﻿namespace KrakenClient.Models.UserTrading;
 
-public class AddOrder : BaseResponse<AddOrderResult>
+public class AddOrderResponse : BaseResponse<AddOrder>
 {
 }
 
-public abstract class AddOrderResult
+public abstract class AddOrder
 {
     /// <summary>
     /// Order description info

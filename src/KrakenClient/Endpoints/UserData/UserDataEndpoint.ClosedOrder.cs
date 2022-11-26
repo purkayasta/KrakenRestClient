@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string ClosedOrderUrl = "ClosedOrders";
 
-    public async Task<ClosedOrders?> GetClosedOrders(bool trades = false, int? userReferenceId = null,
+    public async Task<ClosedOrderResponse?> GetClosedOrders(bool trades = false, int? userReferenceId = null,
         int? startTime = null,
         int? endTime = null, int? offset = null, string closedTime = "both")
     {
@@ -21,11 +21,11 @@ internal sealed partial class UserDataEndpoint
 
         _httpClient.BodyParameters.Add(KrakenParameter.CloseTime, closedTime);
 
-        ClosedOrders? result;
+        ClosedOrderResponse? result;
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<ClosedOrders>(KrakenConstants.PrivateBaseUrl + ClosedOrderUrl);
+            result = await _httpClient.Post<ClosedOrderResponse>(KrakenConstants.PrivateBaseUrl + ClosedOrderUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {

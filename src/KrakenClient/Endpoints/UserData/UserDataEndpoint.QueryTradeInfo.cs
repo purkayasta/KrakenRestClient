@@ -7,19 +7,19 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryTradeInfoUrl = "QueryTrades";
 
-    public async Task<TradesInfo?> QueryTradesInfo(string transactionIds, bool trades = false)
+    public async Task<TradesInfoResponse?> QueryTradesInfo(string transactionIds, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
 
         _httpClient.BodyParameters.Add(KrakenParameter.TransactionId, transactionIds);
         _httpClient.BodyParameters.Add(KrakenParameter.Trade, trades.ToValueStr());
 
-        TradesInfo? result;
+        TradesInfoResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<TradesInfo>(KrakenConstants.PrivateBaseUrl + QueryTradeInfoUrl);
+            result = await _httpClient.Post<TradesInfoResponse>(KrakenConstants.PrivateBaseUrl + QueryTradeInfoUrl);
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {

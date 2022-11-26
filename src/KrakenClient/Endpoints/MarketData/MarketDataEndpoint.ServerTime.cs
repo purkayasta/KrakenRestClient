@@ -8,5 +8,5 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string ServerTimeUrl = "Time";
 
-    public Task<ServerTime?> GetServerTime() => _httpClient.Get<ServerTime>(KrakenConstants.PublicBaseUrl + ServerTimeUrl);
+    public Task<ServerTimeResponse?> GetServerTime() => _httpClient.Get<ServerTimeResponse>(KrakenConstants.PublicBaseUrl + ServerTimeUrl);
 }

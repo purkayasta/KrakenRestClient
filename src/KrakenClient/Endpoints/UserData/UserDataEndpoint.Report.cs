@@ -5,7 +5,7 @@ namespace KrakenClient.Endpoints.UserData;
 
 internal sealed partial class UserDataEndpoint
 {
-    public async Task<RequestExportReport?> RequestExportReport(string report, string description,
+    public async Task<RequestExportReportResponse?> RequestExportReport(string report, string description,
         string format = "csv", string fields = "all", int? starttm = null, int? endtm = null)
     {
         KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
@@ -21,12 +21,12 @@ internal sealed partial class UserDataEndpoint
         if (starttm.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.Start, starttm.Value.ToString());
         if (endtm.HasValue) _httpClient.BodyParameters.Add(KrakenParameter.End, endtm.Value.ToString());
 
-        RequestExportReport? result;
+        RequestExportReportResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<RequestExportReport>(KrakenConstants.PrivateBaseUrl + "AddExport");
+            result = await _httpClient.Post<RequestExportReportResponse>(KrakenConstants.PrivateBaseUrl + "AddExport");
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {
@@ -40,18 +40,18 @@ internal sealed partial class UserDataEndpoint
         return result;
     }
 
-    public async Task<ExportReportStatus?> GetExportReportStatus(string report)
+    public async Task<ExportReportStatusResponse?> GetExportReportStatus(string report)
     {
         KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
 
         _httpClient.BodyParameters.Add(KrakenParameter.Report, report);
 
-        ExportReportStatus? result;
+        ExportReportStatusResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<ExportReportStatus>(KrakenConstants.PrivateBaseUrl + "ExportStatus");
+            result = await _httpClient.Post<ExportReportStatusResponse>(KrakenConstants.PrivateBaseUrl + "ExportStatus");
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {
@@ -90,7 +90,7 @@ internal sealed partial class UserDataEndpoint
         return result;
     }
 
-    public async Task<DeleteExportReport?> DeleteExportReport(string id, string type)
+    public async Task<DeleteExportReportResponse?> DeleteExportReport(string id, string type)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
         KrakenException.ThrowIfNullOrEmpty(type, nameof(type));
@@ -98,12 +98,12 @@ internal sealed partial class UserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Id, id);
         _httpClient.BodyParameters.Add(KrakenParameter.Type, type);
 
-        DeleteExportReport? result;
+        DeleteExportReportResponse? result;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<DeleteExportReport>(KrakenConstants.PrivateBaseUrl + "RemoveExport");
+            result = await _httpClient.Post<DeleteExportReportResponse>(KrakenConstants.PrivateBaseUrl + "RemoveExport");
         }
         catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
         {
