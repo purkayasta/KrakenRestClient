@@ -1,30 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A26FEE79-8B81-499F-B8D4-6B452F45989B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenRestClient", "src\KrakenRestClient\KrakenRestClient.csproj", "{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrakenRestClient", "src\KrakenRestClient\KrakenRestClient.csproj", "{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "net-web-api", "demos\net-web-api\net-web-api.csproj", "{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "net-web-api", "demos\net-web-api\net-web-api.csproj", "{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__solution-items", "__solution-items", "{36542FC2-B7B3-4EDA-848B-9990D246B0E9}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-		LICENSE = LICENSE
 		.gitignore = .gitignore
+		dev.checklist.md = dev.checklist.md
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,8 +34,14 @@ Global
 		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF} = {A26FEE79-8B81-499F-B8D4-6B452F45989B}
 		{763799C3-3B20-404B-AD7E-8A5C7A73CF2A} = {DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5545246-06C8-4A1C-A74E-F1F13F460563}
 	EndGlobalSection
 EndGlobal

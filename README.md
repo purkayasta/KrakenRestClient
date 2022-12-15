@@ -1,8 +1,15 @@
 # KrakenRestClient 
 > An very minimal, performant c# client library for kraken crypto exchange
 
-# Usage:
 
+[NUGET](https://www.nuget.org/packages/KrakenRestClient/)
+
+![Nuget](https://img.shields.io/nuget/v/KrakenRestClient)
+![Download](https://img.shields.io/nuget/dt/KrakenRestClient?color=blue&style=plastic)
+![released](https://img.shields.io/github/release-date/purkayasta/KrakenRestClient?style=flat-square)
+
+
+# Usage:
 
 ## Instantiation:
 ### Microsoft DI:
