@@ -1,5 +1,5 @@
 # KrakenRestClient 
-> A very minimal, performant c# client library for kraken crypto exchange
+> A very minimal, performant c# client library for [kraken crypto exchange](https://www.kraken.com/)
 
 
 [NUGET](https://www.nuget.org/packages/KrakenRestClient/)
