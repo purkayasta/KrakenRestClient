@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\KrakenClient\KrakenClient.csproj" />
+        <ProjectReference Include="..\..\src\KrakenRestClient\KrakenRestClient.csproj" />
     </ItemGroup>
 
 </Project>

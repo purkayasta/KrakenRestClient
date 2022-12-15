@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A26FEE79-8B81-499F-B8D4-6B452F45989B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenClient", "src\KrakenClient\KrakenClient.csproj", "{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenRestClient", "src\KrakenRestClient\KrakenRestClient.csproj", "{0DFE4CAF-DD37-4F0D-A87E-B53550B533DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{DF3F1AF3-F1BF-448A-B26C-FAF049DC8D53}"
 EndProject

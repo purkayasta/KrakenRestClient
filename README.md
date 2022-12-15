@@ -1,4 +1,5 @@
-# Krakenarp - An very minimal, performant unofficial c# client library for kraken crypto exchange.
+# KrakenRestClient 
+> An very minimal, performant unofficial c# client library for kraken crypto exchange
 
 
 ## Supporting implementations:
@@ -11,7 +12,7 @@
 
 - [x] Market Endpoint. ✅
 - [x] User Data Endpoint. ✅
-- [ ] User Trading Endpoint.
+- [ ] User Trading Endpoint. ✅
 - [ ] User Funding Endpoint.
 - [ ] User Staking Endpoint.
 

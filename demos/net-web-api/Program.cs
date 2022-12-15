@@ -1,4 +1,4 @@
-using KrakenClient.Installer;
+using KrakenRestClient.Installer;
 
 var builder = WebApplication.CreateBuilder(args);
 

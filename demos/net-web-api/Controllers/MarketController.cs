@@ -1,4 +1,4 @@
-using KrakenClient.Contracts;
+using KrakenRestClient.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace net6_web_api.Controllers;
