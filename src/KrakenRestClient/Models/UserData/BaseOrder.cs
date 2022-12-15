@@ -1,6 +1,6 @@
 namespace KrakenRestClient.Models.UserData;
 
-public abstract class BaseOrder
+public class BaseOrder
 {
     /// <summary>
     /// Referral order transaction ID that created this order

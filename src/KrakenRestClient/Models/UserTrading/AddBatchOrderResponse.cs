@@ -4,12 +4,12 @@ public class AddBatchOrderResponse : BaseResponse<AddBatchOrder>
 {
 }
 
-public abstract class AddBatchOrder
+public class AddBatchOrder
 {
     [JsonPropertyName("orders")] public AddBatchOrders[]? Orders { get; set; }
 }
 
-public abstract class AddBatchOrders
+public class AddBatchOrders
 {
     /// <summary>
     /// Order description info

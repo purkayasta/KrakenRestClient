@@ -4,7 +4,7 @@ public class TradeVolumeResponse : BaseResponse<TradeVolume>
 {
 }
 
-public abstract class TradeVolume
+public class TradeVolume
 {
     /// <summary>
     /// Volume currency
@@ -23,7 +23,7 @@ public abstract class TradeVolume
     [JsonPropertyName("fees_maker")] public IDictionary<string, FeeTierInfo>? FeesMaker { get; set; }
 }
 
-public abstract class FeeTierInfo
+public class FeeTierInfo
 {
     /// <summary>
     /// Current fee (in percent)

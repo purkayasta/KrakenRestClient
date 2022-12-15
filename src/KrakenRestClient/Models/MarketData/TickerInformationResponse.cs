@@ -4,7 +4,7 @@ public class TickerInformationResponse : BaseResponse<IDictionary<string, Ticker
 {
 }
 
-public abstract class TickerInformation
+public class TickerInformation
 {
     [JsonPropertyName("a")] public string[]? Ask { get; set; }
 

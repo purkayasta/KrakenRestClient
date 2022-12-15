@@ -1,6 +1,6 @@
 namespace KrakenRestClient.Models.UserData;
 
-public abstract class BaseLedgerInfo
+public class BaseLedgerInfo
 {
     [JsonPropertyName("refid")] public string? ReferralTransactionId { get; set; }
 

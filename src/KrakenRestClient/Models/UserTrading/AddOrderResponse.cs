@@ -4,7 +4,7 @@ public class AddOrderResponse : BaseResponse<AddOrder>
 {
 }
 
-public abstract class AddOrder
+public class AddOrder
 {
     /// <summary>
     /// Order description info
@@ -19,7 +19,7 @@ public abstract class AddOrder
     public string[]? TransactionIds { get; set; }
 }
 
-public abstract class AddOrderDescription
+public class AddOrderDescription
 {
     /// <summary>
     /// Order description

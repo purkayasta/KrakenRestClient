@@ -4,7 +4,7 @@ public class AssetInfoResponse : BaseResponse<IDictionary<string, AssetInfo>>
 {
 }
 
-public abstract class AssetInfo
+public class AssetInfo
 {
     [JsonPropertyName("aclass")] public string? AssetClass { get; set; }
 

@@ -4,7 +4,7 @@ public class DeleteExportReportResponse : BaseResponse<DeleteExportReport>
 {
 }
 
-public abstract class DeleteExportReport
+public class DeleteExportReport
 {
     /// <summary>
     /// Whether deletion was successful

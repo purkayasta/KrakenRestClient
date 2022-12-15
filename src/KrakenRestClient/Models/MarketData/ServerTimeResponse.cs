@@ -4,7 +4,7 @@ public class ServerTimeResponse : BaseResponse<ServerTime>
 {
 }
 
-public abstract class ServerTime
+public class ServerTime
 {
     [JsonPropertyName("unixtime")] public int UnixTime { get; set; }
 

@@ -4,7 +4,7 @@ public class TradeAbleAssetPairResponse : BaseResponse<IDictionary<string, Trade
 {
 }
 
-public abstract class TradeAbleAssetPair
+public class TradeAbleAssetPair
 {
     /// <summary>
     /// Alternate pair name

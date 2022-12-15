@@ -54,7 +54,7 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
         BodyParameters.TryAdd("nonce", nonce);
 
         var body = BodyParameters.ConvertToString();
-        var absoluteUri = $"/{Version}/{url}";
+        var absoluteUri = $"{Version}/{url}";
         var signKey = KrakenAuth.CreateAuthSignature(nonce, absoluteUri, body);
 
         ArgumentNullException.ThrowIfNull(signKey, "Invalid Sign Key Generated!!");

@@ -4,7 +4,7 @@ public class LedgerInfoResponse : BaseResponse<LedgerInfo>
 {
 }
 
-public abstract class LedgerInfo
+public class LedgerInfo
 {
     [JsonPropertyName("ledger")] public IDictionary<string, BaseLedgerInfo>? Ledger { get; set; }
 

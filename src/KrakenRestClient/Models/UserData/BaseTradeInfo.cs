@@ -1,6 +1,6 @@
 namespace KrakenRestClient.Models.UserData;
 
-public abstract class BaseTradeInfo
+public class BaseTradeInfo
 {
     /// <summary>
     /// Order responsible for execution of trade

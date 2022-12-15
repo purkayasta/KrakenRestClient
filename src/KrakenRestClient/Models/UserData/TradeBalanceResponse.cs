@@ -4,7 +4,7 @@ public class TradeBalanceResponse : BaseResponse<TradeBalances>
 {
 }
 
-public abstract class TradeBalances
+public class TradeBalances
 {
     /// <summary>
     /// Equivalent balance (combined balance of all currencies)

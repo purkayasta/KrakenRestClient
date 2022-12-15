@@ -4,7 +4,7 @@ public class SystemStatusResponse : BaseResponse<SystemStatus>
 {
 }
 
-public abstract class SystemStatus
+public class SystemStatus
 {
     [JsonPropertyName("status")] public string? Status { get; set; }
 

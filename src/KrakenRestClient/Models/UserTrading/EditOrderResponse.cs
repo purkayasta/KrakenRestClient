@@ -4,7 +4,7 @@ public class EditOrderResponse : BaseResponse<EditOrder>
 {
 }
 
-public abstract class EditOrder
+public class EditOrder
 {
     /// <summary>
     /// Order description info
@@ -72,7 +72,7 @@ public abstract class EditOrder
     public string? ErrorMessage { get; set; }
 }
 
-public abstract class OrderDescription
+public class OrderDescription
 {
     /// <summary>
     /// Order description

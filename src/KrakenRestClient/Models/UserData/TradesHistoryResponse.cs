@@ -4,7 +4,7 @@ public class TradesHistoryResponse : BaseResponse<TradesHistory>
 {
 }
 
-public abstract class TradesHistory
+public class TradesHistory
 {
     [JsonPropertyName("trades")] public IDictionary<string, BaseTradeInfo>? Trades { get; set; }
 

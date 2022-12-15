@@ -4,7 +4,7 @@ public class ExportReportStatusResponse : BaseResponse<ExportReportStatus>
 {
 }
 
-public abstract class ExportReportStatus
+public class ExportReportStatus
 {
     [JsonPropertyName("id")] public string? Id { get; set; }
     [JsonPropertyName("descr")] public string? Description { get; set; }

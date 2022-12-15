@@ -16,7 +16,7 @@ public class CancelOrderBatchResponse : BaseResponse<BaseCancelOrder>
 {
 }
 
-public abstract class CancelAllOrderAfterX
+public class CancelAllOrderAfterX
 {
     /// <summary>
     /// Timestamp (RFC3339 format) at which the request was received
@@ -31,7 +31,7 @@ public abstract class CancelAllOrderAfterX
     public string? TriggerTime { get; set; }
 }
 
-public abstract class BaseCancelOrder
+public class BaseCancelOrder
 {
     /// <summary>
     /// Number of orders cancelled.
@@ -40,7 +40,7 @@ public abstract class BaseCancelOrder
     public int Count { get; set; }
 }
 
-public abstract class CancelOrder : BaseCancelOrder
+public class CancelOrder : BaseCancelOrder
 {
     /// <summary>
     /// if set, order(s) is/are pending cancellation
