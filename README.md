@@ -6,7 +6,7 @@
 
 ![Nuget](https://img.shields.io/nuget/v/KrakenRestClient)
 ![Download](https://img.shields.io/nuget/dt/KrakenRestClient?color=blue&style=plastic)
-![released](https://img.shields.io/github/release-date/purkayasta/KrakenRestClient?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/purkayasta/KrakenRestClient)
 
 
 # Usage:
