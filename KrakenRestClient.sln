@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__solution-items", "__solut
 		README.md = README.md
 		LICENSE = LICENSE
 		.gitignore = .gitignore
+		dev.checklist.md = dev.checklist.md
 	EndProjectSection
 EndProject
 Global
