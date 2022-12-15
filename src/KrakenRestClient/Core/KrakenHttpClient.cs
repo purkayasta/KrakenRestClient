@@ -30,7 +30,7 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
     internal KrakenHttpClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        Headers.TryAdd("User-Agent", "KrakenArp-V2");
+        Headers.TryAdd("User-Agent", "KrakenRestClient-V1");
     }
 
     public Task<T?> Get<T>(string url) where T : class
