@@ -1,4 +1,5 @@
 using KrakenRestClient.Contracts;
+using KrakenRestClient.Models.UserTrading;
 using Microsoft.AspNetCore.Mvc;
 
 namespace net6_web_api.Controllers;
@@ -25,5 +26,19 @@ public class UserDataController : ControllerBase
     public async Task<IActionResult> GetTradeBalance(string asset)
     {
         return Ok(await _krakenClient.UserData().GetTradeBalance(asset));
+    }
+
+    [HttpPost("AddOrder")]
+    public async Task<IActionResult> AddOrder()
+    {
+        var buyOrder = new AddOrderRequest
+        {
+            Pair = "",
+            OrderType = null,
+            Type = null,
+            Volume = 0
+        };
+        var buyOrderResponse = await _krakenClient.UserTrading().AddOrderAsync(buyOrder);
+        return Ok(buyOrderResponse);
     }
 }
