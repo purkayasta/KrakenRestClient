@@ -9,11 +9,12 @@
         <PackageId>KrakenRestClient</PackageId>
         <PackageVersion>0.1</PackageVersion>
         <PackageTags>C#, Dotnet Core, Kraken Crypto Exchange, Crypto Exchange, Kraken</PackageTags>
-        <Description>a minimal kraken crypto exchange library for c#</Description>
+        <Description>a minimal performant crypto exchange library for kraken written in c# for dotnet ecosystem.</Description>
         <Authors>Pritom Purkayasta</Authors>
         <RepositoryType>Git</RepositoryType>
         <RepositoryUrl>https://github.com/purkayasta/KrakenRestClient</RepositoryUrl>
         <PackageProjectUrl></PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
         <Copyright>
 			Copyright (c) Pritom Purkayasta All rights reserved.
 			FREE TO USE TO CONNECT THE WORLD

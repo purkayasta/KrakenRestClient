@@ -1,6 +1,5 @@
 # KrakenRestClient 
-> An very minimal, performant unofficial c# client library for kraken crypto exchange
-
+> An very minimal, performant c# client library for kraken crypto exchange
 
 ## Supporting implementations:
 - [x] Added support for non DI options using Factory method. ✅
@@ -12,7 +11,7 @@
 
 - [x] Market Endpoint. ✅
 - [x] User Data Endpoint. ✅
-- [ ] User Trading Endpoint. ✅
+- [x] User Trading Endpoint. ✅
 - [ ] User Funding Endpoint.
 - [ ] User Staking Endpoint.
 
