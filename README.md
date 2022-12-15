@@ -1,17 +1,31 @@
 # KrakenRestClient 
 > An very minimal, performant c# client library for kraken crypto exchange
 
-## Supporting implementations:
-- [x] Added support for non DI options using Factory method. ✅
-- [x] Added support for Microsoft's DI container. ✅
-- [ ] Support for multiple private key and secret key registration.
-- [ ] Support for key usage pattern configuration (Sequential / Random).
+# Usage:
 
-## Functionality Covered:
 
-- [x] Market Endpoint. ✅
-- [x] User Data Endpoint. ✅
-- [x] User Trading Endpoint. ✅
-- [ ] User Funding Endpoint.
-- [ ] User Staking Endpoint.
+## Instantiation:
+### Microsoft DI:
+```c#
+builder.service.AddKraken("apikey", "secretkey");
 
+public class ApiController {
+    private readonly IKrakenClient krakenClient;
+    public ApiController(IKrakenClient krakenClient)
+        => this.krakenClient = krakenClient;
+}
+```
+
+
+### Factory Pattern:
+```c#
+IKrakenClient krakenClient = KrakenFactoryInstaller.CreateClient("Your Prefer HTTP Client/ HttpClientFactory", "apikey", "secretkey");
+```
+
+
+### API Example:
+1. ServerTime
+```c#
+ServerTimeResponse serverTime = await this.krakenClient.MarketData().GetServerTime();
+Console.WriteLine(serverTime.Result.UnixTime);
+```
