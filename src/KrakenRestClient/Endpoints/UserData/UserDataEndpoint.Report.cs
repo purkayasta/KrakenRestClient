@@ -1,5 +1,4 @@
 ﻿using KrakenRestClient.Models.UserData;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserData;
 
