@@ -26,13 +26,14 @@ public class ApiController {
 
 ### Factory Pattern:
 ```c#
-IKrakenClient krakenClient = KrakenFactoryInstaller.CreateClient("Your Prefer HTTP Client/ HttpClientFactory", "apikey", "secretkey");
+IKrakenClient krakenClient = KrakenInstaller
+    .CreateClient("Your Prefer HTTP Client/ HttpClientFactory", "apikey", "secretkey");
 ```
 
 
 ### API Example:
 1. ServerTime
 ```c#
-ServerTimeResponse serverTime = await this.krakenClient.MarketData().GetServerTime();
+ServerTimeResponse serverTime = await this.krakenClient.MarketData().GetServerTimeAsync();
 Console.WriteLine(serverTime.Result.UnixTime);
 ```

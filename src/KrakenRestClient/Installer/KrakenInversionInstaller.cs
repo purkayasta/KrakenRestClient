@@ -10,8 +10,8 @@ public static class KrakenInversionInstaller
     /// Re commanded way to add kraken into the project 
     /// </summary>
     /// <param name="serviceCollection"></param>
-    /// <param name="apiKey">Kraken API Key</param>
-    /// <param name="secretKey">Kraken Secret Key</param>
+    /// <param name="apiKey">Your Kraken API Key.</param>
+    /// <param name="secretKey">Your Kraken API Secret</param>
     public static void AddKraken(this IServiceCollection serviceCollection, string apiKey, string secretKey)
     {
         ArgumentNullException.ThrowIfNull(apiKey, "ApiKey");
