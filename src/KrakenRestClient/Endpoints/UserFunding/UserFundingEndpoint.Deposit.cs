@@ -1,5 +1,4 @@
 ﻿using KrakenRestClient.Models.UserFunding;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserFunding;
 

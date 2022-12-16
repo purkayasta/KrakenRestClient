@@ -1,5 +1,4 @@
-﻿using KrakenRestClient.Contracts;
-using KrakenRestClient.Core;
+﻿using KrakenRestClient.Core;
 
 namespace KrakenRestClient.Endpoints.UserFunding;
 

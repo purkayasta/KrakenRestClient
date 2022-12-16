@@ -1,6 +1,4 @@
-using KrakenRestClient.Contracts;
 using KrakenRestClient.Models.MarketData;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.MarketData;
 

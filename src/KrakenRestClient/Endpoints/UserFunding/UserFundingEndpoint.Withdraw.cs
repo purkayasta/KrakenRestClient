@@ -1,5 +1,4 @@
 ﻿using KrakenRestClient.Models.UserFunding;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserFunding;
 
@@ -86,7 +85,7 @@ internal partial class UserFundingEndpoint
         return response;
     }
 
-    public async Task<WithdrawalCancelationResponse?> RequestWithdrawalCancellationAsync(string asset,
+    public async Task<WithdrawalCancellationResponse?> RequestWithdrawalCancellationAsync(string asset,
         string referenceId)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));
@@ -95,13 +94,13 @@ internal partial class UserFundingEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
         _httpClient.BodyParameters.Add(KrakenParameter.ReferenceId, referenceId);
 
-        WithdrawalCancelationResponse? response = null;
+        WithdrawalCancellationResponse? response = null;
 
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             response = await _httpClient
-                .Post<WithdrawalCancelationResponse>(KrakenConstants.PrivateBaseUrl + WithdrawnCancelRequestUrl);
+                .Post<WithdrawalCancellationResponse>(KrakenConstants.PrivateBaseUrl + WithdrawnCancelRequestUrl);
         }
         finally
         {

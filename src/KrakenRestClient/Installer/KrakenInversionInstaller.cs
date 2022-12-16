@@ -1,4 +1,3 @@
-using KrakenRestClient.Contracts;
 using KrakenRestClient.Core;
 using Microsoft.Extensions.DependencyInjection;
 

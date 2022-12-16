@@ -1,5 +1,3 @@
-using KrakenRestClient.Utilities;
-
 namespace KrakenRestClient.Core;
 
 internal sealed class KrakenHttpClient : IKrakenHttpClient

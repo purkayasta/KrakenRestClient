@@ -1,5 +1,4 @@
 ﻿using KrakenRestClient.Models.UserTrading;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserTrading;
 

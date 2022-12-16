@@ -60,5 +60,16 @@ public interface IUserFundingEndpoint
     /// <param name="asset">Asset being withdrawn</param>
     /// <param name="referenceId">Withdrawal reference ID</param>
     /// <returns></returns>
-    Task<WithdrawalCancelationResponse?> RequestWithdrawalCancellationAsync(string asset, string referenceId);
+    Task<WithdrawalCancellationResponse?> RequestWithdrawalCancellationAsync(string asset, string referenceId);
+
+    /// <summary>
+    /// Transfer from Kraken spot wallet to Kraken Futures holding wallet. Note that a transfer in the other
+    /// direction must be requested via the Kraken Futures API endpoint.
+    /// </summary>
+    /// <param name="asset">Asset to transfer (asset ID or altname)</param>
+    /// <param name="from">Source wallet. Example - Value: "Spot Wallet"</param>
+    /// <param name="to">Destination wallet. Example - Value: "Futures Wallet"</param>
+    /// <param name="amount">Amount to transfer</param>
+    /// <returns></returns>
+    Task<WalletTransferResponse?> RequestWalletTransferAsync(string asset, string from, string to, string amount);
 }
