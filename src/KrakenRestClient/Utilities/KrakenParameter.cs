@@ -46,4 +46,6 @@ internal static class KrakenParameter
     internal const string Key = "key";
     internal const string Amount = "amount";
     internal const string ReferenceId = "refid";
+    internal const string From = "from";
+    internal const string To = "to";
 }
