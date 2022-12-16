@@ -43,4 +43,6 @@ internal static class KrakenParameter
     internal const string Timeout = "timeout";
     internal const string Method = "method";
     internal const string NewAddress = "new";
+    internal const string Key = "key";
+    internal const string Amount = "amount";
 }
