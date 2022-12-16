@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string TradeVolumeUrl = "TradeVolume";
 
-    public async Task<TradeVolumeResponse?> GetTradeVolume(string? pair = null, bool? feeInfo = null)
+    public async Task<TradeVolumeResponse?> GetTradeVolumeAsync(string? pair = null, bool? feeInfo = null)
     {
         if (!string.IsNullOrEmpty(pair) || !string.IsNullOrWhiteSpace(pair))
             _httpClient.BodyParameters.Add(KrakenParameter.Pair, pair);

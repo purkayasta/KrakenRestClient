@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string LedgerInfoUrl = "Ledgers";
 
-    public async Task<LedgerInfoResponse?> GetLedgerInfo(string asset = "all", string aclass = "currency", string type = "all",
+    public async Task<LedgerInfoResponse?> GetLedgerInfoAsync(string asset = "all", string aclass = "currency", string type = "all",
         int? start = null, int? end = null, int? offset = null)
     {
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);

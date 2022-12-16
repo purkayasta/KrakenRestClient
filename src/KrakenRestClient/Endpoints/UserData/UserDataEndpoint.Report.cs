@@ -5,7 +5,7 @@ namespace KrakenRestClient.Endpoints.UserData;
 
 internal sealed partial class UserDataEndpoint
 {
-    public async Task<RequestExportReportResponse?> RequestExportReport(string report, string description,
+    public async Task<RequestExportReportResponse?> RequestExportReportAsync(string report, string description,
         string format = "csv", string fields = "all", int? starttm = null, int? endtm = null)
     {
         KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
@@ -40,7 +40,7 @@ internal sealed partial class UserDataEndpoint
         return result;
     }
 
-    public async Task<ExportReportStatusResponse?> GetExportReportStatus(string report)
+    public async Task<ExportReportStatusResponse?> GetExportReportStatusAsync(string report)
     {
         KrakenException.ThrowIfNullOrEmpty(report, nameof(report));
 
@@ -65,7 +65,7 @@ internal sealed partial class UserDataEndpoint
         return result;
     }
 
-    public async Task<Stream?> RetrieveDataExport(string id)
+    public async Task<Stream?> RetrieveDataExportAsync(string id)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
 
@@ -90,7 +90,7 @@ internal sealed partial class UserDataEndpoint
         return result;
     }
 
-    public async Task<DeleteExportReportResponse?> DeleteExportReport(string id, string type)
+    public async Task<DeleteExportReportResponse?> DeleteExportReportAsync(string id, string type)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
         KrakenException.ThrowIfNullOrEmpty(type, nameof(type));

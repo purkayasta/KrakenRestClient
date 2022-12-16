@@ -8,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string OrderBookUrl = "Depth";
 
-    public Task<OrderBookResponse?> GetOrderBook(string pair, int count = 2)
+    public Task<OrderBookResponse?> GetOrderBookAsync(string pair, int count = 2)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 

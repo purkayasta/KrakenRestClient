@@ -8,7 +8,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string TradeBalanceUrl = "TradeBalance";
 
-    public async Task<TradeBalanceResponse?> GetTradeBalance(string asset = "ZUSD")
+    public async Task<TradeBalanceResponse?> GetTradeBalanceAsync(string asset = "ZUSD")
     {
         ArgumentNullException.ThrowIfNull(asset, nameof(asset));
 

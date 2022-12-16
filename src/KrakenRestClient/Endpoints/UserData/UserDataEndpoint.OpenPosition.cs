@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string OpenPositionsUrl = "OpenPositions";
 
-    public async Task<OpenPositionsResponse?> GetOpenPositions(string transactionIds, bool docalcs = false,
+    public async Task<OpenPositionsResponse?> GetOpenPositionsAsync(string transactionIds, bool docalcs = false,
         string consolidation = "market")
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));

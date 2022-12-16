@@ -8,7 +8,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryTradeHistoryUrl = "TradesHistory";
 
-    public async Task<TradesHistoryResponse?> GetTradesHistory(string type = "all", bool trades = false, int? start = null,
+    public async Task<TradesHistoryResponse?> GetTradesHistoryAsync(string type = "all", bool trades = false, int? start = null,
         int? end = null, int? offset = null)
     {
         _httpClient.BodyParameters.Add(KrakenParameter.Type, type);

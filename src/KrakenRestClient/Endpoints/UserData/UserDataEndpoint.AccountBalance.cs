@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string UserDataUrl = "Balance";
 
-    public async Task<AccountBalanceResponse?> GetAccountBalance()
+    public async Task<AccountBalanceResponse?> GetAccountBalanceAsync()
     {
         AccountBalanceResponse? result;
 

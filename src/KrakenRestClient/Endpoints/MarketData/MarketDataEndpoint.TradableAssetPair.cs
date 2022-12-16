@@ -8,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string TradeAssetUrl = "AssetPairs";
 
-    public Task<TradeAbleAssetPairResponse?> GetTradableAssetPair(string assetPair)
+    public Task<TradeAbleAssetPairResponse?> GetTradableAssetPairAsync(string assetPair)
     {
         ArgumentNullException.ThrowIfNull(assetPair, nameof(assetPair));
 

@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryLedgersUrl = "QueryLedgers";
 
-    public async Task<LedgerResponse?> QueryLedgers(string id, bool trades = false)
+    public async Task<LedgerResponse?> QueryLedgersAsync(string id, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
 

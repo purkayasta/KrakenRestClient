@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryTradeInfoUrl = "QueryTrades";
 
-    public async Task<TradesInfoResponse?> QueryTradesInfo(string transactionIds, bool trades = false)
+    public async Task<TradesInfoResponse?> QueryTradesInfoAsync(string transactionIds, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
 

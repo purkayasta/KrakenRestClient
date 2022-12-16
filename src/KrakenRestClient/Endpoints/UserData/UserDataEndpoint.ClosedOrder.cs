@@ -7,7 +7,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string ClosedOrderUrl = "ClosedOrders";
 
-    public async Task<ClosedOrderResponse?> GetClosedOrders(bool trades = false, int? userReferenceId = null,
+    public async Task<ClosedOrderResponse?> GetClosedOrdersAsync(bool trades = false, int? userReferenceId = null,
         int? startTime = null,
         int? endTime = null, int? offset = null, string closedTime = "both")
     {

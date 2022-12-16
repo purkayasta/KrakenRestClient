@@ -8,7 +8,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string RecentSpreadUrl = "Spread";
 
-    public Task<RecentSpreadsResponse?> GetRecentSpreads(string pair, int? since = null)
+    public Task<RecentSpreadsResponse?> GetRecentSpreadsAsync(string pair, int? since = null)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 
