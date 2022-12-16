@@ -19,4 +19,12 @@ public interface IUserFundingEndpoint
     /// <param name="newAddress">Whether or not to generate a new address. Default: false</param>
     /// <returns></returns>
     Task<DepositAddressResponse?> GetDepositAddressAsync(string asset, string method, bool newAddress = false);
+
+    /// <summary>
+    /// Retrieve information about recent deposits made.
+    /// </summary>
+    /// <param name="asset">Asset being deposited</param>
+    /// <param name="method">Name of the deposit method</param>
+    /// <returns></returns>
+    Task<RecentDepositsStatusResponse?> GetRecentDepositsStatusAsync(string asset, string? method = null);
 }

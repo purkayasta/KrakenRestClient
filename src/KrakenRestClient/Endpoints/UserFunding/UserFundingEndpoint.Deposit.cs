@@ -7,6 +7,7 @@ internal partial class UserFundingEndpoint
 {
     private const string DepositMethodUrl = "DepositMethods";
     private const string DepositAddressUrl = "DepositAddresses";
+    private const string RecentDepositStatusUrl = "DepositStatus";
 
     public async Task<DepositMethodResponse?> GetDepositMethodsAsync(string asset)
     {
@@ -46,6 +47,29 @@ internal partial class UserFundingEndpoint
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             response = await _httpClient.Post<DepositAddressResponse>(
                 KrakenConstants.PrivateBaseUrl + DepositAddressUrl);
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return response;
+    }
+
+    public async Task<RecentDepositsStatusResponse?> GetRecentDepositsStatusAsync(string asset, string? method = null)
+    {
+        KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));
+
+        RecentDepositsStatusResponse? response = null;
+
+        _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
+        if (method is not null) _httpClient.BodyParameters.Add(KrakenParameter.Method, method);
+
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            response = await _httpClient
+                .Post<RecentDepositsStatusResponse>(KrakenConstants.PrivateBaseUrl + RecentDepositStatusUrl);
         }
         finally
         {
