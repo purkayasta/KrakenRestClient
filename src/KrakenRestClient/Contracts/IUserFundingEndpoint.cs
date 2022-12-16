@@ -36,4 +36,13 @@ public interface IUserFundingEndpoint
     /// <param name="amount">Amount to be withdrawn</param>
     /// <returns></returns>
     Task<WithdrawalInformationResponse?> GetWithdrawalInformationAsync(string asset, string key, string amount);
+
+    /// <summary>
+    /// Make a withdrawal request.
+    /// </summary>
+    /// <param name="asset">Asset being withdrawn</param>
+    /// <param name="key">Withdrawal key name, as set up on your account</param>
+    /// <param name="amount">Amount to be withdrawn</param>
+    /// <returns></returns>
+    Task<WithdrawFundsResponse?> WithdrawFundsAsync(string asset, string key, string amount);
 }
