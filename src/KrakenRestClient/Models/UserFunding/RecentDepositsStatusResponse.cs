@@ -1,10 +1,10 @@
 ﻿namespace KrakenRestClient.Models.UserFunding;
 
-public class RecentDepositsStatusResponse : BaseResponse<IEnumerable<RecentDepositsStatus>>
+public class RecentDepositsStatusResponse : BaseResponse<IEnumerable<RecentStatus>>
 {
 }
 
-public class RecentDepositsStatus
+public class RecentStatus
 {
     /// <summary>
     /// Name of deposit method

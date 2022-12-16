@@ -45,4 +45,12 @@ public interface IUserFundingEndpoint
     /// <param name="amount">Amount to be withdrawn</param>
     /// <returns></returns>
     Task<WithdrawFundsResponse?> WithdrawFundsAsync(string asset, string key, string amount);
+
+    /// <summary>
+    /// Retrieve information about recently requests withdrawals.
+    /// </summary>
+    /// <param name="asset">Asset being withdrawn</param>
+    /// <param name="method">Name of the withdrawal method</param>
+    /// <returns></returns>
+    Task<RecentWithdrawalsStatusResponse?> GetRecentWithdrawalStatusAsync(string asset, string? method = null);
 }
