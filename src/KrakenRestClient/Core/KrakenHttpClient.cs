@@ -24,7 +24,7 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
     public KrakenHttpClient(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
-        Headers.TryAdd("User-Agent", "KrakenArp-V2");
+        Headers.TryAdd("User-Agent", "KrakenRestClient-V1");
     }
 
     internal KrakenHttpClient(HttpClient httpClient)
@@ -83,7 +83,9 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
     {
         if (_httpClientFactory is not null) return _httpClientFactory.CreateClient();
         if (_httpClient is not null) return _httpClient;
+        
         KrakenException.Throw("HttpClient is invalid");
+        
         return null;
     }
 }
