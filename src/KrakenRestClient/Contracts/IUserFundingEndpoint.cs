@@ -53,4 +53,12 @@ public interface IUserFundingEndpoint
     /// <param name="method">Name of the withdrawal method</param>
     /// <returns></returns>
     Task<RecentWithdrawalsStatusResponse?> GetRecentWithdrawalStatusAsync(string asset, string? method = null);
+
+    /// <summary>
+    /// Cancel a recently requested withdrawal, if it has not already been successfully processed.
+    /// </summary>
+    /// <param name="asset">Asset being withdrawn</param>
+    /// <param name="referenceId">Withdrawal reference ID</param>
+    /// <returns></returns>
+    Task<WithdrawalCancelationResponse?> RequestWithdrawalCancellationAsync(string asset, string referenceId);
 }
