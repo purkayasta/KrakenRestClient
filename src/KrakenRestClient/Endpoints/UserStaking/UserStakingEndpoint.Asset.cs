@@ -6,6 +6,7 @@ internal partial class UserStakingEndpoint : IUserStakingEndpoint
 {
     private const string StakeAssetUrl = "Stake";
     private const string UnStakeAssetUrl = "Unstake";
+    private const string StakeableAssetsUrl = "Staking/Assets";
 
     public async Task<StakeAssetResponse?> StakeAssetAsync(string asset, string amount, string method)
     {
@@ -46,6 +47,24 @@ internal partial class UserStakingEndpoint : IUserStakingEndpoint
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             response = await _httpClient.Post<UnStakeAssetResponse>(KrakenConstants.PrivateBaseUrl + UnStakeAssetUrl);
+        }
+        finally
+        {
+            CustomSemaphore.Release();
+        }
+
+        return response;
+    }
+
+    public async Task<StakeableAssetsResponse?> GetListOfStakeableAssetsAsync()
+    {
+        StakeableAssetsResponse? response = null;
+
+        try
+        {
+            await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
+            response = await _httpClient
+                .Post<StakeableAssetsResponse>(KrakenConstants.PrivateBaseUrl + StakeableAssetsUrl);
         }
         finally
         {

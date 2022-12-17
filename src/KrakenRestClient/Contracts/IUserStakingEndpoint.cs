@@ -21,4 +21,11 @@ public interface IUserStakingEndpoint
     /// <param name="amount">Amount of the asset to stake</param>
     /// <returns></returns>
     Task<UnStakeAssetResponse?> UnStakeAssetAsync(string asset, string amount);
+
+    /// <summary>
+    /// Returns the list of assets that the user is able to stake. This operation requires an API key with
+    /// both Withdraw funds and Query funds permission.
+    /// </summary>
+    /// <returns></returns>
+    Task<StakeableAssetsResponse?> GetListOfStakeableAssetsAsync();
 }
