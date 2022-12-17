@@ -10,4 +10,4 @@
 - [x] User Data Endpoint. ✅
 - [x] User Trading Endpoint. ✅
 - [x] User Funding Endpoint. ✅
-- [ ] User Staking Endpoint.
+- [x] User Staking Endpoint. ✅
