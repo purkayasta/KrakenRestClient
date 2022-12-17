@@ -33,10 +33,12 @@ public class UserDataController : ControllerBase
     {
         var buyOrder = new AddOrderRequest
         {
-            Pair = "",
-            OrderType = null,
-            Type = null,
-            Volume = 0
+            Pair = "ETHUSD",
+            OrderType = "market",
+            Type = "buy",
+            Volume = 6000,
+            OrderFlags = "viqc",
+            Validate = true
         };
         var buyOrderResponse = await _krakenClient.UserTrading().AddOrderAsync(buyOrder);
         return Ok(buyOrderResponse);
