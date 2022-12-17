@@ -6,7 +6,9 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryOrderInfoUrl = "QueryOrders";
 
-    public async Task<OrdersInfoResponse?> QueryOrdersInfoAsync(string transactionIds, int? userReferenceId = null,
+    public async Task<OrdersInfoResponse?> QueryOrdersInfoAsync(
+        string transactionIds, 
+        int? userReferenceId = null,
         bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(transactionIds, nameof(transactionIds));
@@ -23,10 +25,6 @@ internal sealed partial class UserDataEndpoint
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             result = await _httpClient.Post<OrdersInfoResponse>(KrakenConstants.PrivateBaseUrl + QueryOrderInfoUrl);
-        }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
         }
         finally
         {

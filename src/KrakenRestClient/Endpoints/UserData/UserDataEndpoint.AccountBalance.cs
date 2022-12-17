@@ -15,10 +15,6 @@ internal sealed partial class UserDataEndpoint
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             result = await _httpClient.Post<AccountBalanceResponse>(KrakenConstants.PrivateBaseUrl + UserDataUrl);
         }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
-        }
         finally
         {
             CustomSemaphore.Release();

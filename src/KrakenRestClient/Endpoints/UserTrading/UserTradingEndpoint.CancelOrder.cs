@@ -31,15 +31,12 @@ internal sealed partial class UserTradingEndpoint
     public async Task<CancelAllOrderResponse?> CancelAllOrderAsync()
     {
         CancelAllOrderResponse? response = null;
+        
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            response = await _httpClient.Post<CancelAllOrderResponse>(
-                KrakenConstants.PrivateBaseUrl + CancelAllOrderUrl);
-        }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
+            response = await _httpClient
+                .Post<CancelAllOrderResponse>(KrakenConstants.PrivateBaseUrl + CancelAllOrderUrl);
         }
         finally
         {
@@ -54,6 +51,7 @@ internal sealed partial class UserTradingEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Timeout, timeOut.ToString());
 
         CancelAllOrderAfterXResponse? response = null;
+        
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
@@ -75,6 +73,7 @@ internal sealed partial class UserTradingEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Orders, transactionIds.ToStr());
 
         CancelOrderBatchResponse? response = null;
+
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);

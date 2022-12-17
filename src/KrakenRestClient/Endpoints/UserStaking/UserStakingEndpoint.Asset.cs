@@ -6,7 +6,7 @@ internal partial class UserStakingEndpoint : IUserStakingEndpoint
 {
     private const string StakeAssetUrl = "Stake";
     private const string UnStakeAssetUrl = "Unstake";
-    
+
     public async Task<StakeAssetResponse?> StakeAssetAsync(string asset, string amount, string method)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));

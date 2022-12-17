@@ -13,7 +13,7 @@ internal sealed partial class UserDataEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Asset, asset);
 
         TradeBalanceResponse? result;
-        
+
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);

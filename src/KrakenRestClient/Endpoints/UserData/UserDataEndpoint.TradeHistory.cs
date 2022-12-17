@@ -6,7 +6,8 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryTradeHistoryUrl = "TradesHistory";
 
-    public async Task<TradesHistoryResponse?> GetTradesHistoryAsync(string type = "all", bool trades = false, int? start = null,
+    public async Task<TradesHistoryResponse?> GetTradesHistoryAsync(string type = "all", bool trades = false,
+        int? start = null,
         int? end = null, int? offset = null)
     {
         _httpClient.BodyParameters.Add(KrakenParameter.Type, type);
@@ -21,7 +22,8 @@ internal sealed partial class UserDataEndpoint
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            result = await _httpClient.Post<TradesHistoryResponse>(KrakenConstants.PrivateBaseUrl + QueryTradeHistoryUrl);
+            result = await _httpClient
+                .Post<TradesHistoryResponse>(KrakenConstants.PrivateBaseUrl + QueryTradeHistoryUrl);
         }
         finally
         {

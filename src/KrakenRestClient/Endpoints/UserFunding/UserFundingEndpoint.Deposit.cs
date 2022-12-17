@@ -19,7 +19,8 @@ internal partial class UserFundingEndpoint
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            response = await _httpClient.Post<DepositMethodResponse>(KrakenConstants.PrivateBaseUrl + DepositMethodUrl);
+            response = await _httpClient
+                .Post<DepositMethodResponse>(KrakenConstants.PrivateBaseUrl + DepositMethodUrl);
         }
         finally
         {
@@ -29,7 +30,9 @@ internal partial class UserFundingEndpoint
         return response;
     }
 
-    public async Task<DepositAddressResponse?> GetDepositAddressAsync(string asset, string method,
+    public async Task<DepositAddressResponse?> GetDepositAddressAsync(
+        string asset, 
+        string method, 
         bool newAddress = false)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));

@@ -81,9 +81,9 @@ internal sealed class KrakenHttpClient : IKrakenHttpClient
     {
         if (_httpClientFactory is not null) return _httpClientFactory.CreateClient();
         if (_httpClient is not null) return _httpClient;
-        
+
         KrakenException.Throw("HttpClient is invalid");
-        
+
         return null;
     }
 }

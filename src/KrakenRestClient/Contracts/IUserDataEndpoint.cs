@@ -36,9 +36,13 @@ public interface IUserDataEndpoint
     /// <param name="offset"></param>
     /// <param name="closedTime">both</param>
     /// <returns></returns>
-    Task<ClosedOrderResponse?> GetClosedOrdersAsync(bool trades = false, int? userReferenceId = null,
+    Task<ClosedOrderResponse?> GetClosedOrdersAsync(
+        bool trades = false, 
+        int? userReferenceId = null,
         int? startTime = null,
-        int? endTime = null, int? offset = null, string closedTime = "both");
+        int? endTime = null, 
+        int? offset = null, 
+        string closedTime = "both");
 
     /// <summary>
     /// Retrieve information about specific orders.
@@ -47,7 +51,9 @@ public interface IUserDataEndpoint
     /// <param name="userReferenceId">Restrict results to given user reference id.</param>
     /// <param name="trades">Whether or not to include trades related to position in output. Default: false</param>
     /// <returns></returns>
-    Task<OrdersInfoResponse?> QueryOrdersInfoAsync(string transactionIds, int? userReferenceId = null,
+    Task<OrdersInfoResponse?> QueryOrdersInfoAsync(
+        string transactionIds, 
+        int? userReferenceId = null,
         bool trades = false);
 
     /// <summary>
@@ -59,8 +65,12 @@ public interface IUserDataEndpoint
     /// <param name="end">Ending unix timestamp or trade tx ID of results (inclusive)</param>
     /// <param name="offset">Result offset for pagination</param>
     /// <returns></returns>
-    Task<TradesHistoryResponse?> GetTradesHistoryAsync(string type = "all", bool trades = false, int? start = null,
-        int? end = null, int? offset = null);
+    Task<TradesHistoryResponse?> GetTradesHistoryAsync(
+        string type = "all", 
+        bool trades = false, 
+        int? start = null,
+        int? end = null, 
+        int? offset = null);
 
     /// <summary>
     /// Retrieve information about specific trades/fills.
@@ -77,7 +87,9 @@ public interface IUserDataEndpoint
     /// <param name="docalcs">Whether to include P&L calculations</param>
     /// <param name="consolidation">Consolidate positions by market/pair</param>
     /// <returns></returns>
-    Task<OpenPositionsResponse?> GetOpenPositionsAsync(string transactionIds, bool docalcs = false,
+    Task<OpenPositionsResponse?> GetOpenPositionsAsync(
+        string transactionIds, 
+        bool docalcs = false,
         string consolidation = "market");
 
     /// <summary>
@@ -90,8 +102,13 @@ public interface IUserDataEndpoint
     /// <param name="end">Ending unix timestamp or ledger ID of results (inclusive)</param>
     /// <param name="offset">Result offset for pagination</param>
     /// <returns></returns>
-    Task<LedgerInfoResponse?> GetLedgerInfoAsync(string asset = "all", string aclass = "currency", string type = "all",
-        int? start = null, int? end = null, int? offset = null);
+    Task<LedgerInfoResponse?> GetLedgerInfoAsync(
+        string asset = "all", 
+        string aclass = "currency", 
+        string type = "all",
+        int? start = null, 
+        int? end = null, 
+        int? offset = null);
 
     /// <summary>
     /// Retrieve information about specific ledger entries.
@@ -122,9 +139,13 @@ public interface IUserDataEndpoint
     /// <param name="starttm">UNIX timestamp for report start time (default 1st of the current month)</param>
     /// <param name="endtm">UNIX timestamp for report end time (default now)</param>
     /// <returns></returns>
-    Task<RequestExportReportResponse?> RequestExportReportAsync(string report, string description,
+    Task<RequestExportReportResponse?> RequestExportReportAsync(
+        string report, 
+        string description,
         string format = "csv",
-        string fields = "all", int? starttm = null, int? endtm = null);
+        string fields = "all", 
+        int? starttm = null, 
+        int? endtm = null);
 
     /// <summary>
     /// Get status of requested data exports.

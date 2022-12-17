@@ -9,7 +9,9 @@ internal partial class UserFundingEndpoint
     private const string WithdrawalStatusUrl = "WithdrawStatus";
     private const string WithdrawnCancelRequestUrl = "WithdrawCancel";
 
-    public async Task<WithdrawalInformationResponse?> GetWithdrawalInformationAsync(string asset, string key,
+    public async Task<WithdrawalInformationResponse?> GetWithdrawalInformationAsync(
+        string asset, 
+        string key,
         string amount)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));
@@ -51,7 +53,8 @@ internal partial class UserFundingEndpoint
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            response = await _httpClient.Post<WithdrawFundsResponse>(KrakenConstants.PrivateBaseUrl + WithdrawFundUrl);
+            response = await _httpClient
+                .Post<WithdrawFundsResponse>(KrakenConstants.PrivateBaseUrl + WithdrawFundUrl);
         }
         finally
         {
@@ -61,7 +64,8 @@ internal partial class UserFundingEndpoint
         return response;
     }
 
-    public async Task<RecentWithdrawalsStatusResponse?> GetRecentWithdrawalStatusAsync(string asset,
+    public async Task<RecentWithdrawalsStatusResponse?> GetRecentWithdrawalStatusAsync(
+        string asset,
         string? method = null)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));
@@ -85,7 +89,8 @@ internal partial class UserFundingEndpoint
         return response;
     }
 
-    public async Task<WithdrawalCancellationResponse?> RequestWithdrawalCancellationAsync(string asset,
+    public async Task<WithdrawalCancellationResponse?> RequestWithdrawalCancellationAsync(
+        string asset,
         string referenceId)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));

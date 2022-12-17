@@ -6,7 +6,8 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string AssetInfoUrl = "Assets";
 
-    public Task<AssetInfoResponse?> GetAssetInfoAsync() => _httpClient.Get<AssetInfoResponse>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
+    public Task<AssetInfoResponse?> GetAssetInfoAsync() =>
+        _httpClient.Get<AssetInfoResponse>(KrakenConstants.PublicBaseUrl + AssetInfoUrl);
 
     public Task<AssetInfoResponse?> GetAssetInfoAsync(string asset, string aclass = "currency")
     {

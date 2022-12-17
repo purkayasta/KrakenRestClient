@@ -2,5 +2,4 @@
 
 public class WithdrawalCancellationResponse : BaseResponse<bool>
 {
-    
 }

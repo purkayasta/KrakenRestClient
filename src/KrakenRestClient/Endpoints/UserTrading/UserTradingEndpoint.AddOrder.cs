@@ -56,10 +56,6 @@ internal sealed partial class UserTradingEndpoint
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             result = await _httpClient.Post<AddOrderResponse>(KrakenConstants.PrivateBaseUrl + AddOrderUrl);
         }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
-        }
         finally
         {
             CustomSemaphore.Release();
@@ -85,10 +81,6 @@ internal sealed partial class UserTradingEndpoint
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             result = await _httpClient.Post<AddBatchOrderResponse>(KrakenConstants.PrivateBaseUrl + AddBatchOrderUrl);
-        }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
         }
         finally
         {

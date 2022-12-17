@@ -2,11 +2,14 @@
 
 namespace KrakenRestClient.Endpoints.UserFunding;
 
-internal partial class UserFundingEndpoint : BaseEndpoint, IUserFundingEndpoint
+internal partial class UserFundingEndpoint
 {
     private const string WalletTransferUrl = "WalletTransfer";
 
-    public async Task<WalletTransferResponse?> RequestWalletTransferAsync(string asset, string from, string to,
+    public async Task<WalletTransferResponse?> RequestWalletTransferAsync(
+        string asset, 
+        string from, 
+        string to,
         string amount)
     {
         KrakenException.ThrowIfNullOrEmpty(asset, nameof(asset));
@@ -24,8 +27,8 @@ internal partial class UserFundingEndpoint : BaseEndpoint, IUserFundingEndpoint
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
-            response = await _httpClient.Post<WalletTransferResponse>(
-                KrakenConstants.PrivateBaseUrl + WalletTransferUrl);
+            response = await _httpClient
+                .Post<WalletTransferResponse>(KrakenConstants.PrivateBaseUrl + WalletTransferUrl);
         }
         finally
         {
