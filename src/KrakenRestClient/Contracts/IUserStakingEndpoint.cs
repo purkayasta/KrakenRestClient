@@ -28,4 +28,12 @@ public interface IUserStakingEndpoint
     /// </summary>
     /// <returns></returns>
     Task<StakeableAssetsResponse?> GetListOfStakeableAssetsAsync();
+
+    /// <summary>
+    /// Returns the list of pending staking transactions. Once resolved, these transactions will appear on the List of
+    /// Staking Transactions endpoint.
+    /// This operation requires an API key with both Query funds and Withdraw funds permissions.
+    /// </summary>
+    /// <returns></returns>
+    Task<PendingStakingTransactionResponse?> GetPendingStackingTransactionAsync();
 }

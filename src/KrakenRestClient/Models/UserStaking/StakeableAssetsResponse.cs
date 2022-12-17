@@ -52,7 +52,7 @@ public abstract class StakeableAssets
     /// Describes the locking periods and percentages for staking/unstaking operations.
     /// </summary>
     [JsonPropertyName("lock")]
-    public Lock Lock { get; set; }
+    public Lock? Lock { get; set; }
 
     /// <summary>
     /// Default: true
