@@ -4,7 +4,7 @@ public class StakeableAssetsResponse : BaseResponse<IEnumerable<StakeableAssets>
 {
 }
 
-public abstract class StakeableAssets
+public class StakeableAssets
 {
     /// <summary>
     /// Asset code/name
@@ -69,7 +69,7 @@ public abstract class StakeableAssets
     public Rewards? Rewards { get; set; }
 }
 
-public abstract class Rewards
+public class Rewards
 {
     /// <summary>
     /// Reward earned while staking
@@ -84,7 +84,7 @@ public abstract class Rewards
     public string? Type { get; set; }
 }
 
-public abstract class Lock
+public class Lock
 {
     [JsonPropertyName("unstaking")] public IEnumerable<LockingObject?>? Unstaking { get; set; }
 
@@ -93,7 +93,7 @@ public abstract class Lock
     [JsonPropertyName("lockup")] public IEnumerable<LockingObject?>? LockUp { get; set; }
 }
 
-public abstract class LockingObject
+public class LockingObject
 {
     /// <summary>
     /// Days the funds are locked.
@@ -108,7 +108,7 @@ public abstract class LockingObject
     public int Percentage { get; set; }
 }
 
-public abstract class MinimumAmount
+public class MinimumAmount
 {
     /// <summary>
     /// Default: "0"

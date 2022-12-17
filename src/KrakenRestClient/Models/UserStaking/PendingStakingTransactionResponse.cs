@@ -4,7 +4,7 @@ public class PendingStakingTransactionResponse : BaseResponse<IEnumerable<Stakin
 {
 }
 
-public abstract class StakingTransaction
+public class StakingTransaction
 {
     /// <summary>
     /// Reference ID
