@@ -1,5 +1,4 @@
 using KrakenRestClient.Models.UserData;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserData;
 
@@ -7,7 +6,7 @@ internal sealed partial class UserDataEndpoint
 {
     private const string QueryLedgersUrl = "QueryLedgers";
 
-    public async Task<LedgerResponse?> QueryLedgers(string id, bool trades = false)
+    public async Task<LedgerResponse?> QueryLedgersAsync(string id, bool trades = false)
     {
         KrakenException.ThrowIfNullOrEmpty(id, nameof(id));
 
@@ -20,10 +19,6 @@ internal sealed partial class UserDataEndpoint
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             result = await _httpClient.Post<LedgerResponse>(KrakenConstants.PrivateBaseUrl + QueryLedgersUrl);
-        }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
         }
         finally
         {

@@ -125,7 +125,6 @@ public class BaseAddOrderRequest
     /// Conditional close order price2
     /// </summary>
     public decimal? ConditionalCloseOrderPrice2 { get; set; }
-
 }
 
 public class AddOrderRequest : BaseAddOrderRequest
@@ -134,7 +133,7 @@ public class AddOrderRequest : BaseAddOrderRequest
     /// Asset pair id or altname
     /// </summary>
     public required string Pair { get; set; }
-    
+
     /// <summary>
     /// RFC3339 timestamp (e.g. 2021-04-01T00:18:45Z) after which the matching engine should reject the new order
     /// request, in presence of latency or order queueing: min now() + 2 seconds, max now() + 60 seconds.

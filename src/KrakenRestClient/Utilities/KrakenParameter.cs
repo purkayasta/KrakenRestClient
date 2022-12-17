@@ -41,4 +41,11 @@ internal static class KrakenParameter
     internal const string Orders = "orders";
     internal const string CancelResponse = "cancel_response";
     internal const string Timeout = "timeout";
+    internal const string Method = "method";
+    internal const string NewAddress = "new";
+    internal const string Key = "key";
+    internal const string Amount = "amount";
+    internal const string ReferenceId = "refid";
+    internal const string From = "from";
+    internal const string To = "to";
 }

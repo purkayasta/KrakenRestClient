@@ -1,6 +1,4 @@
-using KrakenRestClient.Contracts;
 using KrakenRestClient.Models.MarketData;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.MarketData;
 
@@ -8,7 +6,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string TickerUrl = "Ticker";
 
-    public Task<TickerInformationResponse?> GetTickerInformation(string pair)
+    public Task<TickerInformationResponse?> GetTickerInformationAsync(string pair)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 

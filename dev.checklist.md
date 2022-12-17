@@ -9,5 +9,5 @@
 - [x] Market Endpoint. ✅
 - [x] User Data Endpoint. ✅
 - [x] User Trading Endpoint. ✅
-- [ ] User Funding Endpoint.
-- [ ] User Staking Endpoint.
+- [x] User Funding Endpoint. ✅
+- [x] User Staking Endpoint. ✅

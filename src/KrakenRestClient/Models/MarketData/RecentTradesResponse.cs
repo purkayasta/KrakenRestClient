@@ -3,4 +3,3 @@
 public class RecentTradesResponse : BaseResponse<JsonObject>
 {
 }
-

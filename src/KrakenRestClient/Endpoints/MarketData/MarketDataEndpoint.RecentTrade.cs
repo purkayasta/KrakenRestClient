@@ -1,6 +1,4 @@
-﻿using KrakenRestClient.Contracts;
-using KrakenRestClient.Models.MarketData;
-using KrakenRestClient.Utilities;
+﻿using KrakenRestClient.Models.MarketData;
 
 namespace KrakenRestClient.Endpoints.MarketData;
 
@@ -8,7 +6,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string RecentTradeUrl = "Trades";
 
-    public Task<RecentTradesResponse?> GetRecentTrades(string pair, int? since = null)
+    public Task<RecentTradesResponse?> GetRecentTradesAsync(string pair, int? since = null)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 

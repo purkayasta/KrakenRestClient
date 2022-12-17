@@ -7,7 +7,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <IsPackable>true</IsPackable>
         <PackageId>KrakenRestClient</PackageId>
-        <PackageVersion>0.1</PackageVersion>
+        <PackageVersion>1.0</PackageVersion>
         <PackageTags>C#, Dotnet Core, Kraken Crypto Exchange, Crypto Exchange, Kraken</PackageTags>
         <Description>a minimal performant crypto exchange library for kraken written in c# for dotnet ecosystem.</Description>
         <Authors>Pritom Purkayasta</Authors>
@@ -15,23 +15,26 @@
         <RepositoryUrl>https://github.com/purkayasta/KrakenRestClient</RepositoryUrl>
         <PackageProjectUrl>https://www.nuget.org/packages/KrakenRestClient/</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
-        <Copyright>
-			Copyright (c) Pritom Purkayasta All rights reserved.
-			FREE TO USE TO CONNECT THE WORLD
-		</Copyright>
+        <Copyright>pritom purkayasta
+            Copyright (c) Pritom Purkayasta All rights reserved.
+            FREE TO USE TO CONNECT THE WORLD
+        </Copyright>
         <PackageIcon>kraken-logo.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
     <ItemGroup>
-      <None Include="..\..\kraken-logo.png">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Include="..\..\README.md">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
+        <None Include="..\..\kraken-logo.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

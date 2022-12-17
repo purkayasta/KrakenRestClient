@@ -1,5 +1,4 @@
 ﻿using KrakenRestClient.Models.UserTrading;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.UserTrading;
 
@@ -43,14 +42,11 @@ internal sealed partial class UserTradingEndpoint
         _httpClient.BodyParameters.Add(KrakenParameter.Validate, request!.Validate.ToString());
 
         EditOrderResponse? response = null;
+        
         try
         {
             await CustomSemaphore.WaitAsync(KrakenConstants.ThreadTimeout);
             response = await _httpClient.Post<EditOrderResponse>(KrakenConstants.PrivateBaseUrl + EditOrderUrl);
-        }
-        catch (Exception exception) when (exception is ArgumentNullException or KrakenException)
-        {
-            throw;
         }
         finally
         {

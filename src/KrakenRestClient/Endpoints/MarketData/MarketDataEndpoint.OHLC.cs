@@ -1,6 +1,4 @@
-using KrakenRestClient.Contracts;
 using KrakenRestClient.Models.MarketData;
-using KrakenRestClient.Utilities;
 
 namespace KrakenRestClient.Endpoints.MarketData;
 
@@ -8,7 +6,7 @@ internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint
 {
     private const string OhlcUrl = "OHLC";
 
-    public Task<OHLCDataResponse?> GetOhlcData(string pair, int? since = null, int interval = 1)
+    public Task<OHLCDataResponse?> GetOhlcDataAsync(string pair, int? since = null, int interval = 1)
     {
         ArgumentNullException.ThrowIfNull(pair, nameof(pair));
 

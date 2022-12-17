@@ -18,14 +18,14 @@ public class UserDataController : ControllerBase
     [HttpPost("GetAccountBalance")]
     public async Task<IActionResult> GetAccountBalance()
     {
-        var result = await _krakenClient.UserData().GetAccountBalance();
+        var result = await _krakenClient.UserData().GetAccountBalanceAsync();
         return Ok(result);
     }
 
     [HttpPost("GetTradeBalance")]
     public async Task<IActionResult> GetTradeBalance(string asset)
     {
-        return Ok(await _krakenClient.UserData().GetTradeBalance(asset));
+        return Ok(await _krakenClient.UserData().GetTradeBalanceAsync(asset));
     }
 
     [HttpPost("AddOrder")]
@@ -33,10 +33,12 @@ public class UserDataController : ControllerBase
     {
         var buyOrder = new AddOrderRequest
         {
-            Pair = "",
-            OrderType = null,
-            Type = null,
-            Volume = 0
+            Pair = "ETHUSD",
+            OrderType = "market",
+            Type = "buy",
+            Volume = 6000,
+            OrderFlags = "viqc",
+            Validate = true
         };
         var buyOrderResponse = await _krakenClient.UserTrading().AddOrderAsync(buyOrder);
         return Ok(buyOrderResponse);

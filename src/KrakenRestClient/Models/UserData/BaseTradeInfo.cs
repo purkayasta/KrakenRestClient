@@ -106,5 +106,6 @@ public class BaseTradeInfo
     /// <summary>
     /// List of closing trades for position (if available)
     /// </summary>
-    [JsonPropertyName("trades")] public string[]? Trades { get; set; }
+    [JsonPropertyName("trades")]
+    public string[]? Trades { get; set; }
 }
