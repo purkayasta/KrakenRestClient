@@ -1,5 +1,3 @@
-using KrakenRestClient.Core;
-
 namespace KrakenRestClient.Installer;
 
 public static class KrakenInstaller

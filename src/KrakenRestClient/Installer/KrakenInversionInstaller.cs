@@ -1,4 +1,3 @@
-using KrakenRestClient.Core;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KrakenRestClient.Installer;

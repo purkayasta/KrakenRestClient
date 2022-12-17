@@ -1,5 +1,3 @@
-using KrakenRestClient.Core;
-
 namespace KrakenRestClient.Endpoints.UserData;
 
 internal sealed partial class UserDataEndpoint : BaseEndpoint, IUserDataEndpoint
