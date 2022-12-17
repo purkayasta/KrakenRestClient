@@ -6,4 +6,5 @@ public interface IKrakenClient
     public IUserDataEndpoint UserData();
     public IUserTradingEndpoint UserTrading();
     public IUserFundingEndpoint UserFunding();
+    public IUserStakingEndpoint UserStaking();
 }
