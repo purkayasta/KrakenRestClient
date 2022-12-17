@@ -13,4 +13,12 @@ public interface IUserStakingEndpoint
     /// method names for each asset)</param>
     /// <returns></returns>
     Task<StakeAssetResponse?> StakeAssetAsync(string asset, string amount, string method);
+
+    /// <summary>
+    /// Unstake an asset from your staking wallet. This operation requires an API key with Withdraw funds permission.
+    /// </summary>
+    /// <param name="asset">Asset to unstake (asset ID or altname). Must be a valid staking asset (e.g. XBT.M, XTZ.S, ADA.S)</param>
+    /// <param name="amount">Amount of the asset to stake</param>
+    /// <returns></returns>
+    Task<UnStakeAssetResponse?> UnStakeAssetAsync(string asset, string amount);
 }
