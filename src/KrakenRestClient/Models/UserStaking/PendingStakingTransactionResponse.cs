@@ -1,10 +1,10 @@
 ﻿namespace KrakenRestClient.Models.UserStaking;
 
-public class PendingStakingTransactionResponse : BaseResponse<IEnumerable<PendingStakingTransaction>>
+public class PendingStakingTransactionResponse : BaseResponse<IEnumerable<StakingTransaction>>
 {
 }
 
-public abstract class PendingStakingTransaction
+public abstract class StakingTransaction
 {
     /// <summary>
     /// Reference ID

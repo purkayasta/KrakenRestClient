@@ -1,5 +1,3 @@
-using KrakenRestClient.Core;
-
 namespace KrakenRestClient.Endpoints.MarketData;
 
 internal sealed partial class MarketDataEndpoint : IMarketDataEndpoint

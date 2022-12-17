@@ -36,4 +36,11 @@ public interface IUserStakingEndpoint
     /// </summary>
     /// <returns></returns>
     Task<PendingStakingTransactionResponse?> GetPendingStackingTransactionAsync();
+
+    /// <summary>
+    /// Returns the list of 1000 recent staking transactions from past 90 days.
+    /// This operation requires an API key with Query funds permissions.
+    /// </summary>
+    /// <returns></returns>
+    Task<StakingTransactionResponse?> GetListOfStakingTransactionAsync();
 }

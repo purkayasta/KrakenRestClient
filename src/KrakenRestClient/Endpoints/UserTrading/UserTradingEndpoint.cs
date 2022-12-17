@@ -1,6 +1,4 @@
-﻿using KrakenRestClient.Core;
-
-namespace KrakenRestClient.Endpoints.UserTrading;
+﻿namespace KrakenRestClient.Endpoints.UserTrading;
 
 internal sealed partial class UserTradingEndpoint : BaseEndpoint, IUserTradingEndpoint
 {

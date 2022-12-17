@@ -1,6 +1,4 @@
-﻿using KrakenRestClient.Core;
-
-namespace KrakenRestClient.Endpoints.UserFunding;
+﻿namespace KrakenRestClient.Endpoints.UserFunding;
 
 internal sealed partial class UserFundingEndpoint : BaseEndpoint, IUserFundingEndpoint
 {

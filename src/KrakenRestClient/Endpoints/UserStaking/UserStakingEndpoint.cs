@@ -1,6 +1,4 @@
-﻿using KrakenRestClient.Core;
-
-namespace KrakenRestClient.Endpoints.UserStaking;
+﻿namespace KrakenRestClient.Endpoints.UserStaking;
 
 internal partial class UserStakingEndpoint : BaseEndpoint, IUserStakingEndpoint
 {

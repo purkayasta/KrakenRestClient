@@ -1,5 +1,4 @@
-﻿using KrakenRestClient.Core;
-using KrakenRestClient.Endpoints.MarketData;
+﻿using KrakenRestClient.Endpoints.MarketData;
 using KrakenRestClient.Endpoints.UserData;
 using KrakenRestClient.Endpoints.UserFunding;
 using KrakenRestClient.Endpoints.UserStaking;
