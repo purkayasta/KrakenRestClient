@@ -1,3 +1,8 @@
+using KrakenRestClient.Endpoints.MarketData;
+using KrakenRestClient.Endpoints.UserData;
+using KrakenRestClient.Endpoints.UserFunding;
+using KrakenRestClient.Endpoints.UserStaking;
+using KrakenRestClient.Endpoints.UserTrading;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KrakenRestClient.Installer;
@@ -32,5 +37,14 @@ public static class KrakenInversionInstaller
         serviceCollection.AddHttpClient();
         serviceCollection.AddScoped<IKrakenHttpClient, KrakenHttpClient>();
         serviceCollection.AddScoped<IKrakenClient, KrakenClient>();
+    }
+
+    private static void RegisterServices(IServiceCollection serviceCollection)
+    {
+        serviceCollection.AddScoped<IMarketDataEndpoint, MarketDataEndpoint>();
+        serviceCollection.AddScoped<IUserDataEndpoint, UserDataEndpoint>();
+        serviceCollection.AddScoped<IUserTradingEndpoint, UserTradingEndpoint>();
+        serviceCollection.AddScoped<IUserFundingEndpoint, UserFundingEndpoint>();
+        serviceCollection.AddScoped<IUserStakingEndpoint, UserStakingEndpoint>();
     }
 }
