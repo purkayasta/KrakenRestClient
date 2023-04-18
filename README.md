@@ -37,13 +37,13 @@ IKrakenClient krakenClient = KrakenInstaller
 1. ServerTime
 
 ```c#
-ServerTimeResponse serverTime = await this.krakenClient.MarketData().GetServerTimeAsync();
+ServerTimeResponse serverTime = await this.krakenClient.MarketData.GetServerTimeAsync();
 Console.WriteLine(serverTime.Result.UnixTime);
 ```
 
 2.  TickerInformation (Crypto Prices)
 ```c#
-TickerInformationResponse tickerResponse = await this.krakenClient.MarketData().GetTickerInformationAsync("ETHUSD");
+TickerInformationResponse tickerResponse = await this.krakenClient.MarketData.GetTickerInformationAsync("ETHUSD");
 Console.WriteLine(tickerResponse.Result.TodayOpeningPrice);
 
 ```
