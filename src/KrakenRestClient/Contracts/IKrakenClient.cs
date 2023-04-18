@@ -6,29 +6,29 @@ public interface IKrakenClient
     /// Public Endpoint
     /// </summary>
     /// <returns></returns>
-    public IMarketDataEndpoint MarketData();
+    public IMarketDataEndpoint MarketData { get; }
 
     /// <summary>
     /// Authenticated Endpoint
     /// </summary>
     /// <returns></returns>
-    public IUserDataEndpoint UserData();
+    public IUserDataEndpoint UserData { get; }
 
     /// <summary>
     /// Authenticated Endpoint.
     /// </summary>
     /// <returns></returns>
-    public IUserTradingEndpoint UserTrading();
+    public IUserTradingEndpoint UserTrading { get; }
 
     /// <summary>
     /// Authenticated Endpoint.
     /// </summary>
     /// <returns></returns>
-    public IUserFundingEndpoint UserFunding();
+    public IUserFundingEndpoint UserFunding { get; }
 
     /// <summary>
     /// Authenticated Endpoint.
     /// </summary>
     /// <returns></returns>
-    public IUserStakingEndpoint UserStaking();
+    public IUserStakingEndpoint UserStaking { get; }
 }

@@ -12,8 +12,8 @@ internal static class KrakenAuth
         ArgumentNullException.ThrowIfNull(nonce, nameof(nonce));
         ArgumentNullException.ThrowIfNull(url, nameof(url));
 
-        var payload = nonce + parameters;
-        var signatureArray = GetHash(url, payload);
+        string payload = nonce + parameters;
+        byte[] signatureArray = GetHash(url, payload);
 
         return Convert.ToBase64String(signatureArray);
     }
@@ -21,12 +21,10 @@ internal static class KrakenAuth
     internal static byte[] GetHash(string url, string payload)
     {
         ArgumentNullException.ThrowIfNull(SecretKey, nameof(SecretKey));
-
-        using var sha256 = SHA256.Create();
-        using var hmacSha512 = new HMACSHA512(Convert.FromBase64String(SecretKey));
-        var payloadHash = sha256.ComputeHash(Encoding.UTF8.GetBytes(payload));
-        var uriByteArr = Encoding.UTF8.GetBytes(url);
-        var payloadArray = uriByteArr.Concat(payloadHash).ToArray();
+        using HMACSHA512 hmacSha512 = new HMACSHA512(Convert.FromBase64String(SecretKey));
+        byte[] payloadHash = SHA256.HashData(Encoding.UTF8.GetBytes(payload));
+        byte[] uriByteArr = Encoding.UTF8.GetBytes(url);
+        byte[] payloadArray = uriByteArr.Concat(payloadHash).ToArray();
         return hmacSha512.ComputeHash(payloadArray);
     }
 }
