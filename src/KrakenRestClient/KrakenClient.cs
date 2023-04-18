@@ -27,7 +27,7 @@ internal sealed class KrakenClient : IKrakenClient
     {
         get
         {
-            if (_marketDataEndpoint is null) throw new KrakenException(typeof(IMarketDataEndpoint) + " is null");
+            if (_marketDataEndpoint is null) throw new KrakenException(nameof(IMarketDataEndpoint) + " is null");
             return _marketDataEndpoint;
         }
     }
@@ -36,7 +36,7 @@ internal sealed class KrakenClient : IKrakenClient
     {
         get
         {
-            if (_userDataEndpoint is null) throw new KrakenException(typeof(IUserDataEndpoint) + " is null");
+            if (_userDataEndpoint is null) throw new KrakenException(nameof(IUserDataEndpoint) + " is null");
             return _userDataEndpoint;
         }
     }
@@ -45,7 +45,7 @@ internal sealed class KrakenClient : IKrakenClient
     {
         get
         {
-            if (_userTradingEndpoint is null) throw new KrakenException(typeof(IUserTradingEndpoint) + " is null");
+            if (_userTradingEndpoint is null) throw new KrakenException(nameof(IUserTradingEndpoint) + " is null");
             return _userTradingEndpoint;
         }
     }
@@ -54,7 +54,7 @@ internal sealed class KrakenClient : IKrakenClient
     {
         get
         {
-            if (_userFundingEndpoint is null) throw new KrakenException(typeof(IUserFundingEndpoint) + " is null");
+            if (_userFundingEndpoint is null) throw new KrakenException(nameof(IUserFundingEndpoint) + " is null");
             return _userFundingEndpoint;
         }
     }
@@ -63,7 +63,7 @@ internal sealed class KrakenClient : IKrakenClient
     {
         get
         {
-            if (_userStakingEndpoint is null) throw new KrakenException(typeof(IUserStakingEndpoint) + " is null");
+            if (_userStakingEndpoint is null) throw new KrakenException(nameof(IUserStakingEndpoint) + " is null");
             return _userStakingEndpoint;
         }
     }

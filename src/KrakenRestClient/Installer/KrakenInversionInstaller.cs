@@ -15,36 +15,36 @@ public static class KrakenInversionInstaller
     /// <param name="serviceCollection"></param>
     /// <param name="apiKey">Your Kraken API Key.</param>
     /// <param name="secretKey">Your Kraken API Secret</param>
-    public static void AddKraken(this IServiceCollection serviceCollection, string apiKey, string secretKey)
+    public static IServiceCollection AddKraken(this IServiceCollection? serviceCollection, string apiKey, string secretKey)
     {
+        ArgumentNullException.ThrowIfNull(serviceCollection);
         ArgumentNullException.ThrowIfNull(apiKey, "ApiKey");
         ArgumentNullException.ThrowIfNull(secretKey, "SecretKey");
 
-        serviceCollection.AddHttpClient();
-        serviceCollection.AddScoped<IKrakenHttpClient, KrakenHttpClient>();
-        serviceCollection.AddScoped<IKrakenClient, KrakenClient>();
-
         KrakenAuth.ApiKey = apiKey;
         KrakenAuth.SecretKey = secretKey;
+
+        return RegisterServices(serviceCollection);
     }
+
 
     /// <summary>
     /// For Public Methods Only
     /// </summary>
     /// <param name="serviceCollection"></param>
-    public static void AddKraken(this IServiceCollection serviceCollection)
-    {
-        serviceCollection.AddHttpClient();
-        serviceCollection.AddScoped<IKrakenHttpClient, KrakenHttpClient>();
-        serviceCollection.AddScoped<IKrakenClient, KrakenClient>();
-    }
+    public static IServiceCollection AddKraken(this IServiceCollection serviceCollection)
+        => RegisterServices(serviceCollection);
 
-    private static void RegisterServices(IServiceCollection serviceCollection)
+    private static IServiceCollection RegisterServices(IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IMarketDataEndpoint, MarketDataEndpoint>();
-        serviceCollection.AddScoped<IUserDataEndpoint, UserDataEndpoint>();
-        serviceCollection.AddScoped<IUserTradingEndpoint, UserTradingEndpoint>();
-        serviceCollection.AddScoped<IUserFundingEndpoint, UserFundingEndpoint>();
-        serviceCollection.AddScoped<IUserStakingEndpoint, UserStakingEndpoint>();
+        return serviceCollection
+            .AddHttpClient()
+            .AddScoped<IKrakenHttpClient, KrakenHttpClient>()
+            .AddScoped<IKrakenClient, KrakenClient>()
+            .AddScoped<IMarketDataEndpoint, MarketDataEndpoint>()
+            .AddScoped<IUserDataEndpoint, UserDataEndpoint>()
+            .AddScoped<IUserTradingEndpoint, UserTradingEndpoint>()
+            .AddScoped<IUserFundingEndpoint, UserFundingEndpoint>()
+            .AddScoped<IUserStakingEndpoint, UserStakingEndpoint>();
     }
 }
