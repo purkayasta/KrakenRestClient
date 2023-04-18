@@ -6,8 +6,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services
-    .AddKraken(builder.Configuration["KrakenPrivateApiKey"], builder.Configuration["KrakenSecretKey"]);
+builder.Services.AddKraken(
+    builder.Configuration["KrakenPrivateApiKey"]!,
+    builder.Configuration["KrakenSecretKey"]!);
+
+
 
 var app = builder.Build();
 

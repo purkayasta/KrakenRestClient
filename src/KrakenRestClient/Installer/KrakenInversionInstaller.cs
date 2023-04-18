@@ -15,11 +15,14 @@ public static class KrakenInversionInstaller
     /// <param name="serviceCollection"></param>
     /// <param name="apiKey">Your Kraken API Key.</param>
     /// <param name="secretKey">Your Kraken API Secret</param>
-    public static IServiceCollection AddKraken(this IServiceCollection? serviceCollection, string apiKey, string secretKey)
+    public static IServiceCollection AddKraken(this IServiceCollection? serviceCollection, string? apiKey, string? secretKey)
     {
         ArgumentNullException.ThrowIfNull(serviceCollection);
-        ArgumentNullException.ThrowIfNull(apiKey, "ApiKey");
-        ArgumentNullException.ThrowIfNull(secretKey, "SecretKey");
+
+        if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentException($"{nameof(apiKey)} is invalid");
+        if (string.IsNullOrEmpty(secretKey) || string.IsNullOrWhiteSpace(secretKey))
+            throw new ArgumentException($"{nameof(secretKey)} is invalid");
 
         KrakenAuth.ApiKey = apiKey;
         KrakenAuth.SecretKey = secretKey;
@@ -34,6 +37,32 @@ public static class KrakenInversionInstaller
     /// <param name="serviceCollection"></param>
     public static IServiceCollection AddKraken(this IServiceCollection serviceCollection)
         => RegisterServices(serviceCollection);
+
+    /* Option Pattern
+    public static IServiceCollection AddKraken(
+        this IServiceCollection serviceCollection,
+        Action<KrakenOption>? krakenConfiguration)
+    {
+        ArgumentNullException.ThrowIfNull(serviceCollection);
+        ArgumentNullException.ThrowIfNull(krakenConfiguration);
+
+        serviceCollection
+            .AddOptions<KrakenOption>()
+            .Configure(krakenConfiguration)
+            .Validate(option =>
+            {
+                if (string.IsNullOrEmpty(option.ApiKey) || string.IsNullOrWhiteSpace(option.ApiKey))
+                    return false;
+
+                if (string.IsNullOrEmpty(option.SecretKey) || string.IsNullOrWhiteSpace(option.SecretKey))
+                    return false;
+
+                return true;
+            }, $"{nameof(KrakenOption.ApiKey)} Or {nameof(KrakenOption.SecretKey)} is invalid");
+
+        return RegisterServices(serviceCollection);
+    }
+    */
 
     private static IServiceCollection RegisterServices(IServiceCollection serviceCollection)
     {

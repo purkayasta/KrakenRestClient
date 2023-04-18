@@ -56,5 +56,4 @@ public static class KrakenInstaller
             userFundingEndpoint: new UserFundingEndpoint(krakenClient),
             userStakingEndpoint: new UserStakingEndpoint(krakenClient));
     }
-
 }

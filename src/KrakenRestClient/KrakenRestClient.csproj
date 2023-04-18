@@ -1,44 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <IsPackable>true</IsPackable>
-        <PackageId>KrakenRestClient</PackageId>
-        <PackageVersion>1.0</PackageVersion>
-        <PackageTags>C#, Dotnet Core, Kraken Crypto Exchange, Crypto Exchange, Kraken</PackageTags>
-        <Description>a minimal performant crypto exchange library for kraken written in c# for dotnet ecosystem.</Description>
-        <Authors>Pritom Purkayasta</Authors>
-        <RepositoryType>Git</RepositoryType>
-        <RepositoryUrl>https://github.com/purkayasta/KrakenRestClient</RepositoryUrl>
-        <PackageProjectUrl>https://www.nuget.org/packages/KrakenRestClient/</PackageProjectUrl>
-        <RepositoryType>git</RepositoryType>
-        <Copyright>pritom purkayasta
-            Copyright (c) Pritom Purkayasta All rights reserved.
-            FREE TO USE TO CONNECT THE WORLD
-        </Copyright>
-        <PackageIcon>kraken-logo.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\..\kraken-logo.png">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Include="..\..\README.md">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-    </ItemGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<IsPackable>true</IsPackable>
+		<PackageId>KrakenRestClient</PackageId>
+		<PackageVersion>2.0</PackageVersion>
+		<PackageTags>C#, Dotnet Core, Kraken Crypto Exchange, Crypto Exchange, Kraken</PackageTags>
+		<Description>a minimal performant crypto exchange library for kraken written in c# for dotnet ecosystem.</Description>
+		<Authors>Pritom Purkayasta</Authors>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/purkayasta/KrakenRestClient</RepositoryUrl>
+		<PackageProjectUrl>https://www.nuget.org/packages/KrakenRestClient/</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<Copyright>
+			pritom purkayasta
+			Copyright (c) Pritom Purkayasta All rights reserved.
+			FREE TO USE TO CONNECT THE WORLD
+		</Copyright>
+		<PackageIcon>kraken-logo.png</PackageIcon>
+		<PackageReadmeFile>nuget.md</PackageReadmeFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\kraken-logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\nuget.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-        <PackageReference Include="System.Text.Json" Version="7.0.1" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="7.0.0" />
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
+	</ItemGroup>
 </Project>
